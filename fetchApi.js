@@ -1,12 +1,30 @@
-import fetch from 'node-fetch'
+import Spotify from "./spotify.js";
 
-fetch("https://api.spotify.com/v1/search?q=twenty%20one%20pilots&type=track%2Cartist&market=US&limit=10&offset=5", {
-  headers: {
-    Accept: "application/json",
-    Authorization: "Bearer BQCD_L5kH2zRogqyRyQdW704jMCJ_bQR-eXsMQ0m3j1UGzRRJVkC5SfaBB2km1aLsBVnUweqqWC9FhcZHUG7h-HVhEHl8FkuzZZo_qvfryrWTlcdsNulk8GPAotFo-4YRsQHZztl52GKRN2ffMmn8VrK1rl2J3E",
-    "Content-Type": "application/json"
+const CLIENT_ID = '062ce822e4104fa4827a8db0ee93263d';
+const CLIENT_SECRET = 'e2e8aa8221984bb9959a7e2ef62de1e1';
+const API_TOKEN = 'https://accounts.spotify.com/api/token';
+
+
+async function getToken() {
+  const response = await fetch(API_TOKEN, {
+    body: 'grant_type=client_credentials',
+    headers: {
+      Authorization: 'Basic '+ btoa(`${CLIENT_ID}:${CLIENT_SECRET}`),
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    method : 'POST',
+  })
+  console.log(response);
+  if (response.status == 200) {
+    let data = await response.json();
+    console.log(data);
+    return data.access_token;
   }
-})
-  .then((res) => res.json())
-  .then(({ tracks }) => tracks.items)
-  .then((res) => console.log(res))
+}
+
+window.onload = async () => {
+  const token = await getToken();
+  
+  Spotify.getNPossibleTracks('Blinding Lights', 10, token);
+  
+}
