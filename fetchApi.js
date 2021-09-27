@@ -25,6 +25,6 @@ async function getToken() {
 window.onload = async () => {
   const token = await getToken();
   
-  Spotify.getFirstThreeTracks('Blinding Lights', token);
+  Spotify.getNPossibleTracks('Blinding Lights', 10, token);
   
 }
