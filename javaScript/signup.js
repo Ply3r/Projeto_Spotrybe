@@ -31,7 +31,7 @@ const isUser = (username, password) => {
 const createNewAccount = async (username, password, spotifyId) => {
   const spotTrybe = await createAsyncSpotTrybe();
   console.log()
-  if (spotifyId) username = await spotTrybe.getUserProfileInfo(spotifyId).display_name;
+  if (spotifyId) username = (await spotTrybe.getUserProfileInfo(spotifyId)).display_name;
 
   const objeto = {
     [username]: {
