@@ -43,7 +43,21 @@ class Spotify {
     })
     
     const data = await response.json();
-    return data;
+    console.log(data);
+    const dados = {
+      name: data.name,
+      tracks: data.tracks.items.reduce((acc,item) => {
+        const objeto = {
+          id: item.track.id,
+          preview_url: item.track.preview_url,
+          artists: item.track.artists,
+          album: item.track.album,
+        }
+        return [...acc, objeto]
+      }, [])
+    }
+
+    return dados;
   }
 
   async getListOfBrowseCategories(numberOfCategories) {
@@ -122,17 +136,22 @@ class Spotify {
   }
 
   async getUserProfileInfo(userId) {
-    const result = await fetch(`https://api.spotify.com/v1/users/${userId}`, {
-      headers: {
-        Accept: "application/json",
-        Authorization: `Bearer ${this.token}`,
-        "Content-Type": "application/json"
-      }
-    })
-    console.log(result);
-    const data = await result.json();
-    console.log(data);
-    return data;
+    try {
+      const result = await fetch(`https://api.spotify.com/v1/users/${userId}`, {
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${this.token}`,
+          "Content-Type": "application/json"
+        }
+      })
+      console.log(result);
+      const data = await result.json();
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.log('userName invalido');
+      return null;
+    }
   }
 
   async getArtistsInfo(artistId) {
