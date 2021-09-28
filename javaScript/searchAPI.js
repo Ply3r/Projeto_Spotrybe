@@ -12,17 +12,32 @@ async function getToken() {
     },
     method : 'POST',
   })
-  console.log(response);
   if (response.status == 200) {
     let data = await response.json();
-    console.log(data);
     return data.access_token;
   }
 }
 
 function makeNewItens(array) {
-  array.forEach((item) => {
-
+  const container = document.querySelector('.grid-container')
+  console.log(array)
+  array.forEach(({ name, id, artists ,preview_url, album }) => {
+    const artistaPrincipal = artists[0].name
+    const { images } = album;
+    const img = images[1].url
+    const imagemContainer = document.createElement('img');
+    imagemContainer.src = img;
+    const h2 = document.createElement('h2')
+    h2.innerText = name;
+    const h4 = document.createElement('h4')
+    h4.innerText = artistaPrincipal;
+    const div = document.createElement('div')
+    div.className = 'grid-item'
+    div.id = id;
+    div.append(imagemContainer)
+    div.append(h2)
+    div.append(h4)
+    container.append(div)
   })
 } 
 
@@ -40,19 +55,13 @@ const getSearch = async (query) => {
     .then(({ items }) => items);
     makeNewItens(array)
   }
-  getSearch()
   
-  
-  function getSearchInput() {
-    const search = document.querySelector('#search');
-    search.addEventListener('keyup', (event) => {
-      const { value } = event.target;
-      console.log(event.which)
-    if(event.which === 13) {
-      console.log(value)
-
-      getSearchInput(value)
-    }
-  })
-}
-getSearchInput();
+  getSearch('drake')
+//   function getSearchInput() {
+//     const search = document.querySelector('#search');
+//     search.addEventListener('keyup', ({ target }) => {
+//     const { value } = target;
+//     getSearchInput(value)
+//   })
+// }
+// getSearchInput();
