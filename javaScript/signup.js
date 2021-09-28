@@ -60,7 +60,7 @@ async function createNewAccount() {
   const user = document.querySelector('#username').value;
   const pass = document.querySelector('#password').value;
   const spotifyId = document.querySelector('#spotify-id').value;
-  const userRetrieved = await spotTrybe.getUserProfileInfo('12147540058');
+  const userRetrieved = await spotTrybe.getUserProfileInfo(spotifyId);
   console.log(userRetrieved)
 
   const objeto ={ 
@@ -73,5 +73,16 @@ async function createNewAccount() {
     }
   }
   localStorage.setItem(user,objeto[user]);
+}
+
+async function VerifyLogin() {
+  const user = document.querySelector('#username').value;
+  const pass = document.querySelector('#password').value;
+
+  const usuarioAtual = localStorage.getItem(user);
+
+  if(!usuarioAtual) {
+    localStorage.setItem('currentUser',usuarioAtual);
+  }
 }
 createNewAccount();
