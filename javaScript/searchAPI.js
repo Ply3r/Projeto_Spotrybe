@@ -20,11 +20,11 @@ async function getToken() {
 
 function makeNewItens(array) {
   const container = document.querySelector('.grid-container')
-  console.log(array)
+  container.innerHTML = '';
   array.forEach(({ name, id, artists ,preview_url, album }) => {
     const artistaPrincipal = artists[0].name
     const { images } = album;
-    const img = images[1].url
+    const img = images[0].url
     const imagemContainer = document.createElement('img')
     imagemContainer.src = img;
     const h2 = document.createElement('h2')
@@ -34,9 +34,16 @@ function makeNewItens(array) {
     const div = document.createElement('div')
     div.className = 'grid-item'
     div.id = id;
-    div.append(img)
-    div.append(h2)
-    div.append(h4)
+    if(preview_url) {
+      const audio = new Audio(preview_url)
+      div.addEventListener('click', () => {
+        audio.play()
+      })
+      div.appendChild(audio)
+    }
+    div.append(imagemContainer)
+    div.appendChild(h2)
+    div.appendChild(h4)
     container.append(div)
   })
 } 
@@ -56,12 +63,13 @@ const getSearch = async (query) => {
     makeNewItens(array)
   }
   
-  getSearch('drake')
-//   function getSearchInput() {
-//     const search = document.querySelector('#search');
-//     search.addEventListener('keyup', ({ target }) => {
-//     const { value } = target;
-//     getSearchInput(value)
-//   })
-// }
-// getSearchInput();
+  function getSearchInput() {
+    const search = document.getElementById('search');
+    const icon = document.getElementById('icon')
+    icon.addEventListener('click', () => {
+      const { value } = search
+      getSearch(value)
+    })
+  }
+
+getSearchInput();
