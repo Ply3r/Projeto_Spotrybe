@@ -76,6 +76,14 @@ main {
   width: 100%;
 }
 
+.grid-item .fa-heart {
+  height: 100%;
+  width: 90%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
 .grid-container::-webkit-scrollbar {
   width: 10px;
 }
