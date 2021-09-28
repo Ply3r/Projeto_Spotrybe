@@ -5,7 +5,7 @@ class Spotify {
   }
 
   async init() {
-    this.token = await this.token;
+    this.token = await this.getToken();
   }
 
   static async getToken() {
