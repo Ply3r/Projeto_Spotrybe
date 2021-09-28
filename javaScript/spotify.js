@@ -100,11 +100,11 @@ class Spotify {
     return data;
   }
 
-  async getListOfNewReleases() {
-    console.log('Fetching List of new releases from ', categoryName);
+  async getListOfNewReleases(numberOfNewReleases) {
+    console.log('Fetching List of new releases from ');
     console.time('getListOfNewReleases done')
 
-    const result = await fetch(`https://api.spotify.com/v1/browse/new-releases?country=BR&limit=${numberOfCategories}`, {
+    const result = await fetch(`https://api.spotify.com/v1/browse/new-releases?country=BR&limit=${numberOfNewReleases}`, {
       headers: {
         Accept: "application/json",
         Authorization: `Bearer ${this.token}`,
@@ -116,6 +116,25 @@ class Spotify {
     console.log(data);
 
     console.timeEnd('getListOfNewReleases done')
+    return data;
+  }
+
+  async getListOfFeaturedPlaylists(numberOfNewReleases) {
+    console.log('Fetching List of Featured Playlists from ');
+    console.time('getListOfFeaturedPlaylists done')
+
+    const result = await fetch(`https://api.spotify.com/v1/browse/featured-playlists?country=BR&limit=${numberOfNewReleases}`, {
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${this.token}`,
+        "Content-Type": "application/json"
+      }
+    })
+    console.log(result);
+    const data = await result.json();
+    console.log(data);
+
+    console.timeEnd('getListOfFeaturedPlaylists done')
     return data;
   }
 
