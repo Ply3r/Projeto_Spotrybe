@@ -121,7 +121,7 @@ class Spotify {
     return data;
   }
 
-  async getUserProfileInfo(userId) {
+  async  getUserProfileInfo(userId) {
     const result = await fetch(`https://api.spotify.com/v1/users/${userId}`, {
       headers: {
         Accept: "application/json",
