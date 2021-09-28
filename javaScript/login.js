@@ -33,10 +33,10 @@ const createSuccessElement = (msg, elToAppend) => {
   elToAppend.appendChild(p);
 };
 
-const isUser = (username, password) => {
+const isUser = (username) => {
   const user = JSON.parse(localStorage.getItem(username));
 
-  return user && user.password === password ? user : false;
+  return user ? user : false;
 };
 
 const signIn = (e) => {
@@ -45,14 +45,17 @@ const signIn = (e) => {
   const username = document.getElementById('username').value;
   const password = document.getElementById('password').value;
 
-  const user = isUser(username, password);
+  const user = isUser(username);
   const passwordContainer = document.getElementsByClassName('password-container')[0];
 
   if (user) {
-    localStorage.setItem('currentUser', JSON.stringify(user));
-    createSuccessElement('Logged in successfully!', passwordContainer);
-
-    window.location.href = '../pages/search.html';
+    if (password === user.password) {
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        createSuccessElement('Logged in successfully!', passwordContainer);
+        window.location.href = '../pages/search.html';
+    } else {
+        CreateErrorElement('Password is not correct!', passwordContainer);
+    }
   } else {
     CreateErrorElement('User not found!', passwordContainer);
   }
