@@ -50,7 +50,35 @@ class Spotify {
     console.log(data);
   }
 
-  async getTrack(id) {
+  async getListOfBrowseCategories(numberOfCategories) {
+    const result = await fetch(`https://api.spotify.com/v1/browse/categories?country=BR&limit=${numberOfCategories}`, {
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${this.token}`,
+        "Content-Type": "application/json"
+      }
+    })
+    console.log(result);
+    const data = await result.json();
+    console.log(data);
+    return data;
+  }
+
+  async getUserPlaylists(userId, numberOfPlaylists) {
+    const result = await fetch(`https://api.spotify.com/v1/users/${userId}/playlists?limit=${numberOfPlaylists}`, {
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${this.token}`,
+        "Content-Type": "application/json"
+      }
+    })
+    console.log(result);
+    const data = await result.json();
+    console.log(data);
+    return data;
+  }
+
+  async getTrackById(id) {
     const result = await fetch(`https://api.spotify.com/v1/tracks/${id}?market=BR`, {
       headers: {
         Accept: "application/json",
