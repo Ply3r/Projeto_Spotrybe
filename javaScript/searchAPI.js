@@ -25,7 +25,7 @@ function makeNewItens(array) {
     const artistaPrincipal = artists[0].name
     const { images } = album;
     const img = images[1].url
-    const imagemContainer = document.createElement('img')
+    const imagemContainer = document.createElement('img');
     imagemContainer.src = img;
     const h2 = document.createElement('h2')
     h2.innerText = name;
@@ -34,7 +34,7 @@ function makeNewItens(array) {
     const div = document.createElement('div')
     div.className = 'grid-item'
     div.id = id;
-    div.append(img)
+    div.append(imagemContainer)
     div.append(h2)
     div.append(h4)
     container.append(div)

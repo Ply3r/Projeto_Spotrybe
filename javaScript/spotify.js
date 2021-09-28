@@ -31,7 +31,7 @@ class Spotify {
   }
   
   async getPlaylist(id) {
-    const response = await fetch(`https://api.spotify.com/v1/playlists/${id}?market=BR&fields=followers(total),id,name,owner(display_name),tracks(items)`, 
+    const response = await fetch(`https://api.spotify.com/v1/playlists/${id}?market=BR&fields=followers(total),id,images,name,owner(display_name),tracks(items)`, 
     {
       headers: {
         Accept: "application/json",
