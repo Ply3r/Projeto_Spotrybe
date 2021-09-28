@@ -14,15 +14,15 @@
     />
     <!-- Page CSS -->
     <link rel="stylesheet" href="../css/aside.css" />
-    <link rel="stylesheet" href="../css/login.css" />
+    <link rel="stylesheet" href="../css/signup.css" />
   </head>
   <body>
     <header class="mb-4">
-      <h1>Login</h1>
+      <h1>Sign Up</h1>
       <div class="purple-gradient-line"></div>
     </header>
     <main>
-      <form>
+      <form class="d-flex flex-column align-items-center">
         <div class="mb-3">
           <label class="form-label" for="username">Username</label>
           <input
@@ -30,11 +30,10 @@
             type="text"
             name="username"
             id="username"
-            placeholder="MatheusMeContrata"
-            required
+            placeholder="NoobMaster69"
           />
         </div>
-        <div class="mb-3 password-container">
+        <div class="mb-4 password-container">
           <label class="form-label" for="password">Password</label>
           <input
             class="form-control"
@@ -42,15 +41,10 @@
             name="password"
             id="password"
             placeholder="********"
-            required
           />
         </div>
-        <div class="mb-4 text-center d-flex justify-content-between align-items-center">
-          <a href="./change_password.html">Forgot your password?</a>
-          <button class="btn btn-purple login-btn" type="submit" id="submit">Sign In</button>
-        </div>
-        <p class="mb-4 h3 text-center">New to SpoTrybe?</p>
-        <button class="btn btn-light signup-btn">SIGN UP</button>
+        <button class="mb-4 btn btn-purple signup-btn" type="submit">Sign Up</button>
+        <p class="h3 text-center">Have an Account? <a class="h5" href="./login.html">Log in</a></p>
       </form>
     </main>
     <!-- Bootstrap JS -->
@@ -60,6 +54,6 @@
       crossorigin="anonymous"
     ></script>
     <!-- Page JS-->
-    <script src="../javaScript/login.js"></script>
+    <script src="../javaScript/signup.js"></script>
   </body>
 </html>
