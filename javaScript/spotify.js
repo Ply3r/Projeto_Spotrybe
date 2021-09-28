@@ -31,7 +31,7 @@ class Spotify {
   }
   
   async getPlaylist(id) {
-    const response = await fetch(`https://api.spotify.com/v1/playlists/${id}?market=BR&fields=tracks(items())`, 
+    const response = await fetch(`https://api.spotify.com/v1/playlists/${id}?market=BR&fields=followers(total),id,images,name,owner(display_name),tracks(items)`, 
     {
       headers: {
         Accept: "application/json",
@@ -42,7 +42,7 @@ class Spotify {
     console.log('---------------------')
     console.log({
       Accept: "application/json",
-      Authorization: 'Bearer ' +await this.token,
+      Authorization: 'Bearer ' + this.token,
       "Content-Type": "application/json"
     })
     console.log(response);

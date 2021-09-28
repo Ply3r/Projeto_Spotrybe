@@ -2,10 +2,11 @@ import Spotify from "./spotify.js";
 
 
 window.onload = async () => {
-  const spotify = new Spotify();
-  
-  const track = await spotify.getNPossibleTracks('Blinding Lights', 1);
+  // precisa de esperar inicializar 
+  const spotTrybe = await createAsyncSpotTrybe();
+  const track = await spotTrybe.getNPossibleTracks('Blinding Lights', 1);
   const trackId = track.tracks.items[0].id;
-  spotify.getTrack(trackId);
+  spotTrybe.getTrack(trackId);
   
+  spotTrybe.getPlaylist('2G73gq2YWPWwToeAwNaD2k');
 }
