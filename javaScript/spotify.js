@@ -135,6 +135,7 @@ class Spotify {
     return data;
   }
 
+
   async getUserProfileInfo(userId) {
     try {
       const result = await fetch(`https://api.spotify.com/v1/users/${userId}`, {
@@ -156,6 +157,20 @@ class Spotify {
 
   async getArtistsInfo(artistId) {
     const result = await fetch(`https://api.spotify.com/v1/artists/${artistId}`, {
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${this.token}`,
+        "Content-Type": "application/json"
+      }
+    })
+    console.log(result);
+    const data = await result.json();
+    console.log(data);
+    return data;
+  }
+
+  async getArtistSongs(artistId) {
+    const result = await fetch(`https://api.spotify.com/v1/artists/${artistId}/top-tracks`, {
       headers: {
         Accept: "application/json",
         Authorization: `Bearer ${this.token}`,

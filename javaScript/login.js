@@ -18,12 +18,16 @@ const createSuccessElement = (msg, elToAppend) => {
 
 const isUser = (username, password) => {
   const localUsers = JSON.parse(localStorage.getItem('users'));
-
-  if (localUsers) {
-    if (localUsers[username] && localUsers[username].password === password) return localUsers[username];
-  }
-  return false;
+  const submitButton = document.getElementById('submit');
+  submitButton.addEventListener('click', () => {
+    if (localUsers) {
+      if (localUsers[username].userID === username && localUsers[username].password === password) {
+        window.location.href = "../pages/search.html"
+      };
+    }
+  })
 };
+isUser();
 
 const signIn = (e) => {
   e.preventDefault();
