@@ -1,15 +1,17 @@
-import Spotify from "./spotify.js";
+import createAsyncSpotTrybe from "./spotify.js";
 
 
 window.onload = async () => {
-  const spotify = new Spotify();
-  
-<<<<<<< HEAD:javaScript/fetchApi.js
-  Spotify.getNPossibleTracks('Blinding Lights', 10, token);
-=======
-  const track = await spotify.getNPossibleTracks('Blinding Lights', 1);
+  // precisa de esperar inicializar 
+  const spotTrybe = await createAsyncSpotTrybe();
+  const track = await spotTrybe.getNPossibleTracks('Blinding Lights', 1);
   const trackId = track.tracks.items[0].id;
-  spotify.getTrack(trackId);
->>>>>>> f2e9a70dc5d071c8cdced5d4851d84cf80a0fa58:fetchApi.js
-  
+  await spotTrybe.getTrackById(trackId);
+  await spotTrybe.getUserPlaylists('12147540058',5);
+  await spotTrybe.getPlaylist('2G73gq2YWPWwToeAwNaD2k');
+  await spotTrybe.getListOfBrowseCategories(5);
+  await spotTrybe.getListOfNewReleases(5);
+  await spotTrybe.getCategorysPlaylists('rock',5);
+  await spotTrybe.getListOfFeaturedPlaylists(5);
+  await spotTrybe.getUserProfileInfo('12147540058');
 }
