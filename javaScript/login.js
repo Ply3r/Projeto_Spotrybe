@@ -1,23 +1,26 @@
-const CreateErrorElement = (msg) => {
-  let p = document.createElement('p');
-  p.innerText = msg;
-  p.className = 'mt-2 error-msg'
-  p.style.color = 'red';
-
-  return p;
-};
+const CreateErrorElement = (msg, elToAppend) => {
+    let p = document.createElement('p');
+    p.innerText = msg;
+    p.className = 'mt-2 error-msg';
+    p.style.color = 'red';
+  
+    elToAppend.appendChild(p);
+  };
 
 const isUser = (username, password) => {
-    const localUsers = JSON.parse(localStorage.getItem('users'));
+  const localUsers = JSON.parse(localStorage.getItem('users'));
 
-    return localUsers ? localUsers.find(([localUser, localPassword]) => localUser === username && localPassword === password) : null;
-}
+  if (localUsers) {
+    if (localUsers[username] && localUsers[username].password === password) return currentUser;
+  }
+  return false;
+};
 
-const signIn = (evt) => {
-  evt.preventDefault();
+const signIn = (e) => {
+  e.preventDefault();
 
-  const username = document.getElementById('username');
-  const password = document.getElementById('password');
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
 
   const user = isUser(username, password);
 
@@ -25,14 +28,13 @@ const signIn = (evt) => {
     localStorage.setItem('currentUser', user);
     // Mudar para home aqui
   } else {
-
     if (!document.getElementsByClassName('error-msg')[0]) {
-        const passwordContainer = document.getElementsByClassName('password-container')[0];
-        passwordContainer.appendChild(CreateErrorElement('Usuário não encontrado!'));
+      const passwordContainer = document.getElementsByClassName('password-container')[0];
+      CreateErrorElement('Usuário não encontrado!', passwordContainer);
     }
   }
 };
 
-signInButton = document.getElementsByClassName('login-btn')[0];
+const signInButton = document.getElementsByClassName('login-btn')[0];
 
 signInButton.addEventListener('click', signIn);
