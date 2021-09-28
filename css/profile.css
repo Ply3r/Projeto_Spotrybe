@@ -1,0 +1,74 @@
+/*
+  Reset Basico
+*/
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+
+/*
+  Coteudo profile
+*/
+main .profile {
+
+  background: #272624;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+}
+
+main .main-title {
+  text-align: center;
+  color: white;
+}
+
+main .info-profile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 70%;
+  height: 500px;
+  margin: 0 auto;
+}
+
+main .info-profile .container-liked-songs {
+  color: white;
+  text-align: center;
+  font-size: 20px;
+}
+
+main .info-profile .container-liked-songs ul {
+  list-style-type: none;
+}
+
+main .info-profile .profile-card {
+  background: #202020;
+  padding: 10px;
+  width: 60%;
+  height: 500px;
+  color: white;
+  text-align: center;
+  border-radius: 10px;
+}
+
+main .info-profile .profile-card .image-profile {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  margin-bottom: 50px;
+}
+
+main .info-profile .profile-card .name-profile {
+margin-bottom: 20px;
+}
+
+main .info-profile .profile-card .info-profile {
+  display: inline;
+  margin: 0 20px;
+}
