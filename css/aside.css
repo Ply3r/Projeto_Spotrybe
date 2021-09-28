@@ -84,3 +84,35 @@ aside {
   color: black;
   background-color: white;
 }
+
+.image-container-player {
+  height: 22vh;
+  display: grid;
+  place-items: center;
+}
+
+.image-container-player img{
+  width: 70%;
+  height: 90%;
+  box-shadow: 0 0 1em black;
+}
+
+player {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 0;
+  height: 10vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+player audio {
+  margin-left: 15%;
+  width: 50vw;
+}
+
+audio::-webkit-media-controls-panel {
+  background: transparent ! important;
+}
