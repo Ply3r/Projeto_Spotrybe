@@ -59,7 +59,7 @@ async function createNewAccount() {
   const spotTrybe = await createAsyncSpotTrybe();
   const user = document.querySelector('#username').value;
   const pass = document.querySelector('#password').value;
- // const spotifyId = document.querySelector('#spotify-id').value;
+  const spotifyId = document.querySelector('#spotify-id').value;
   const userRetrieved = await spotTrybe.getUserProfileInfo('12147540058');
   console.log(userRetrieved)
 
@@ -67,10 +67,11 @@ async function createNewAccount() {
     [user]:{
       name: userRetrieved.display_name,
       password: pass,
-      spotifyId: '',
-      playlists: []
+      spotifyId: spotifyId,
+      playlists: [],
+      favorites: [],
     }
   }
-
+  localStorage.setItem(user,objeto[user]);
 }
 createNewAccount();
