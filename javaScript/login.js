@@ -17,17 +17,10 @@ const createSuccessElement = (msg, elToAppend) => {
 };
 
 const isUser = (username, password) => {
-  const localUsers = JSON.parse(localStorage.getItem('users'));
-  const submitButton = document.getElementById('submit');
-  submitButton.addEventListener('click', () => {
-    if (localUsers) {
-      if (localUsers[username].userID === username && localUsers[username].password === password) {
-        window.location.href = "../pages/search.html"
-      };
-    }
-  })
+  const user = JSON.parse(localStorage.getItem(username));
+
+  return user && user.password === password ? user : false;
 };
-isUser();
 
 const signIn = (e) => {
   e.preventDefault();
@@ -42,7 +35,7 @@ const signIn = (e) => {
     localStorage.setItem('currentUser', user);
     createSuccessElement('Logged in successfully!', passwordContainer);
 
-    // Mudar para home aqui
+    window.location.href = '../pages/search.html';
   } else {
     if (!document.getElementsByClassName('error-msg')[0]) {
       CreateErrorElement('User not found!', passwordContainer);
