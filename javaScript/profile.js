@@ -7,7 +7,6 @@ async function getProfileDice(){
 
   const user = JSON.parse(localStorage.getItem('currentUser'));
 
-  
   let {display_name, images, followers} = await spotTrybe.getUserProfileInfo(user.spotifyId);  
 
   changeProfile(display_name, images[0], followers.total);
