@@ -1,4 +1,4 @@
-import createAsyncSpotTrybe from "./spotify.js";
+import createAsyncSpotTrybe from './spotify.js'
 let limit = 20;
 
 function makeNewItens(array) {
@@ -64,8 +64,6 @@ function getMoreItens(array) {
     container.append(div)
   })
 }
-
-
 
 const getSearch = async (query, limite, slice = 0) => {
   if (slice > 50) return;
