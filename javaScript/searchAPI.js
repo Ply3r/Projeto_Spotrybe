@@ -1,13 +1,35 @@
 import createAsyncSpotTrybe from './spotify.js'
 let limit = 20;
 
-function makeNewItens(array) {
-  limit = 20
+function addLocalStorage(id) {
+  if(localStorage.favoritos) {
+    const favoritos = localStorage.getItem('favoritos')
+    const favParse = JSON.parse(favoritos)
+    let json;
+    if (favParse.includes(id)) {
+      const arrFiltrado = favParse.filter((item) => item !== id)
+      json = JSON.stringify(arrFiltrado)
+    } else {
+      json = JSON.stringify([...favParse, id])
+    }
+    localStorage.setItem('favoritos', json)
+  } else {
+    const json = JSON.stringify([id])
+    localStorage.setItem('favoritos', json)
+  }
+}
+
+function makeNewItens(array, clear) {
   const container = document.querySelector('.grid-container')
   const imagemPlayer = document.querySelector('#current-image-player')
   const audio = document.querySelector('#audio');
-  container.innerHTML = '';
+  if (clear) {
+    container.innerHTML = '';
+    limit = 20
+  }
   array.forEach(({ name, id, artists, preview_url, album }) => {
+    const getFav = localStorage.getItem('favoritos')
+    const arrayOfFavs = JSON.parse(getFav);
     const artistaPrincipal = artists
       .map((artista) => artista.name)
       .join(', ')
@@ -28,39 +50,23 @@ function makeNewItens(array) {
         audio.src = preview_url;
       })
     }
-    div.append(imagemContainer)
-    div.appendChild(h2)
-    div.appendChild(h4)
-    container.append(div)
-  })
-}
-
-function getMoreItens(array) {
-  const container = document.querySelector('.grid-container')
-  const imagemPlayer = document.querySelector('#current-image-player')
-  const audio = document.querySelector('#audio');
-  array.forEach(({ name, id, artists, preview_url, album }) => {
-    const artistaPrincipal = artists[0].name
-    const { images } = album;
-    const img = images[0].url
-    const imagemContainer = document.createElement('img')
-    imagemContainer.src = img;
-    const h2 = document.createElement('h2')
-    h2.innerText = name;
-    const h4 = document.createElement('h4')
-    h4.innerText = artistaPrincipal;
-    const div = document.createElement('div')
-    div.className = 'grid-item'
-    div.id = id;
-    if(preview_url) {
-      div.addEventListener('click', () => {
-        imagemPlayer.src = img;
-        audio.src = preview_url;
-      })
+    const heart = document.createElement('div');
+    heart.className = 'far fa-heart'
+    if( arrayOfFavs.includes(id) ) {
+      heart.className = 'fas fa-heart'
     }
+    heart.addEventListener('click', () => {
+      if(heart.classList.contains('fas')) {
+        heart.className = 'far fa-heart'
+      } else {
+        heart.className = 'fas fa-heart'
+      }
+      addLocalStorage(id)
+    })
     div.append(imagemContainer)
     div.appendChild(h2)
     div.appendChild(h4)
+    div.appendChild(heart)
     container.append(div)
   })
 }
@@ -75,7 +81,7 @@ const getSearch = async (query, limite, slice = 0) => {
     .catch(() => canSearch = false);
   if(canSearch) {
     array = array.slice(slice)
-    slice ? getMoreItens(array) : makeNewItens(array)
+    slice ? makeNewItens(array) : makeNewItens(array, true)
   }
 }
   
