@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Spotrybe | Search</title>
+  <title>Spotrybe | Favorites</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="../css/aside.css">
-  <link rel="stylesheet" href="../css/search.css">
+  <link rel="stylesheet" href="../css/favorites.css">
 </head>
 <body>
   <aside>
@@ -17,8 +17,8 @@
     </div>
     <div class="menu-container">
       <a href="./profile.html"><span><i class="fas fa-home"></i></span> Home</a>
-      <a class="active"> <span><i class="fas fa-search"></i></span> Search</a>
-      <a href="./favorites.html"> <span><i class="fas fa-heart"></i></span> Liked Songs</a>
+      <a href="./search.html"> <span><i class="fas fa-search"></i></span> Search</a>
+      <a class="active"> <span><i class="fas fa-heart"></i></span> Liked Songs</a>
     </div>
     <div class="image-container-player">
       <img id="current-image-player" src="https://macmagazine.com.br/wp-content/uploads/2021/03/30-spotify-800x600.jpg" alt="">
@@ -26,18 +26,15 @@
   </aside>
   <main>
     <div class="hero-search">
-      <h1>Search</h1>
-    </div>
-    <div class="busca-container">
-      <input type="text" id="search" placeholder="Buscar musicas..." minlength="2" maxlength="50">
-      <i id="icon" class="fas fa-search busca-item"></i>
+      <h1>Favoritos</h1>
     </div>
     <div class="grid-container">
+
     </div>
   </main>
   <player>
     <audio src="" controls id="audio"></audio>
   </player>
-  <script src="../javaScript/searchAPI.js" type="module"></script>
+  <script src="../javaScript/favorites.js" type="module"></script>
 </body>
 </html>

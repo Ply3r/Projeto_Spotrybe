@@ -9,28 +9,7 @@ main {
   place-items: center;
   color: white;
   font-size: 3rem;
-  background-image: linear-gradient(aqua, transparent);
-}
-
-.busca-container {
-  height: 5%;
-  width: 100%;
-  display: grid;
-  place-items: center;
-}
-
-.busca-container input {
-  border: none;
-  height: 50%;
-  width: 50%;
-  font-size: 1.5em;
-  border-radius: 30px;
-  padding: 0 20px;
-}
-
-.busca-item {
-  right: 22%;
-  position: absolute;
+  background-image: linear-gradient(red, transparent);
 }
 
 .grid-container {
