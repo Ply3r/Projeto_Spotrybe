@@ -20,8 +20,10 @@ async function getToken() {
 
 function makeNewItens(array) {
   const container = document.querySelector('.grid-container')
+  const imagemPlayer = document.querySelector('#current-image-player')
+  const audio = document.querySelector('#audio');
   container.innerHTML = '';
-  array.forEach(({ name, id, artists ,preview_url, album }) => {
+  array.forEach(({ name, id, artists, preview_url, album }) => {
     const artistaPrincipal = artists[0].name
     const { images } = album;
     const img = images[0].url
@@ -35,11 +37,10 @@ function makeNewItens(array) {
     div.className = 'grid-item'
     div.id = id;
     if(preview_url) {
-      const audio = new Audio(preview_url)
       div.addEventListener('click', () => {
-        audio.play()
+        imagemPlayer.src = img;
+        audio.src = preview_url;
       })
-      div.appendChild(audio)
     }
     div.append(imagemContainer)
     div.appendChild(h2)
@@ -65,8 +66,7 @@ const getSearch = async (query) => {
   
   function getSearchInput() {
     const search = document.getElementById('search');
-    const icon = document.getElementById('icon')
-    icon.addEventListener('click', () => {
+    search.addEventListener('keyup', () => {
       const { value } = search
       getSearch(value)
     })

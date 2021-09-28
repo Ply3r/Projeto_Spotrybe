@@ -28,6 +28,18 @@ main {
   padding: 0 20px;
 }
 
+.image-container-player {
+  height: 22vh;
+  display: grid;
+  place-items: center;
+}
+
+.image-container-player img{
+  width: 70%;
+  height: 90%;
+  box-shadow: 0 0 1em black;
+}
+
 .busca-item {
   right: 22%;
   position: absolute;
@@ -40,6 +52,7 @@ main {
   padding: 25px;
   display: grid;
   gap: 15px;
+  margin-bottom: 10vh;
   place-items: center;
   grid-template-columns: repeat(5, 1fr)
 }
@@ -61,4 +74,44 @@ main {
 
 .grid-item img {
   width: 100%;
+}
+
+.grid-container::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+.grid-container::-webkit-scrollbar-track {
+  background: #272624;
+}
+
+/* Handle */
+.grid-container::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+.grid-container::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+player {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 0;
+  height: 10vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+player audio {
+  margin-left: 15%;
+  width: 50vw;
+}
+
+audio::-webkit-media-controls-panel {
+  background: transparent ! important;
 }
