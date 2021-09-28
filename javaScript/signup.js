@@ -57,7 +57,7 @@ const createNewAccount = async (username, password, spotifyId) => {
     },
   };
   localStorage.setItem(username, JSON.stringify(objeto[username]));
-  localStorage.setItem('currentUser', objeto[username]);
+  localStorage.setItem('currentUser', JSON.stringify(objeto[username]));
 };
 
 const signUp = (e) => {

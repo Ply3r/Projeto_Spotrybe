@@ -50,7 +50,7 @@ const signIn = (e) => {
   const passwordContainer = document.getElementsByClassName('password-container')[0];
 
   if (user) {
-    localStorage.setItem('currentUser', user);
+    localStorage.setItem('currentUser', JSON.stringify(user));
     createSuccessElement('Logged in successfully!', passwordContainer);
 
     window.location.href = '../pages/search.html';
