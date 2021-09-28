@@ -20,7 +20,11 @@ async function getToken() {
   }
 }
 
+function makeNewItens(array) {
+  array.forEach((item) => {
 
+  })
+} 
 
 const getSearch = async (query) => {
   const token = await getToken()
@@ -34,16 +38,19 @@ const getSearch = async (query) => {
     .then(res => res.json())
     .then(({ tracks }) => tracks)
     .then(({ items }) => items);
+    makeNewItens(array)
+  }
+  getSearch()
   
-}
-
-getSearch()
-
-function getSearchInput() {
-  const search = document.querySelector('#search');
-  search.addEventListener('keyup', (event) => {
-    const { value } = event.target;
+  
+  function getSearchInput() {
+    const search = document.querySelector('#search');
+    search.addEventListener('keyup', (event) => {
+      const { value } = event.target;
+      console.log(event.which)
     if(event.which === 13) {
+      console.log(value)
+
       getSearchInput(value)
     }
   })
