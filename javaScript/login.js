@@ -1,38 +1,34 @@
 const CreateErrorElement = (msg, elToAppend) => {
-    // Remove previous error message
-  
-    const prevErrMessage = document.querySelector('.error-msg');
-    console.log(prevErrMessage);
-    if (prevErrMessage) prevErrMessage.remove();
-    else {
-      // Add new error message
-  
-      let p = document.createElement('p');
-      p.innerText = msg;
-      p.className = 'mt-2 error-msg';
-      p.style.color = 'red';
-  
-      elToAppend.appendChild(p);
-    }
-  };
-  
-  const createSuccessElement = (msg, elToAppend) => {
-    // Remove previous success message
-  
-    const prevSuccessMessage = document.querySelector('.error-msg');
-  
-    if (prevSuccessMessage) prevSuccessMessage.remove();
-    else {
-      // Add new success message
-  
-      let p = document.createElement('p');
-      p.innerText = msg;
-      p.className = 'mt-2 success-msg';
-      p.style.color = 'green';
-    
-      elToAppend.appendChild(p);
-    }
-  };
+  // Remove previous error message
+
+  const prevErrMessage = document.querySelector('.error-msg');
+  if (prevErrMessage) prevErrMessage.remove();
+
+  // Add new error message
+
+  let p = document.createElement('p');
+  p.innerText = msg;
+  p.className = 'mt-2 error-msg';
+  p.style.color = 'red';
+
+  elToAppend.appendChild(p);
+};
+
+const createSuccessElement = (msg, elToAppend) => {
+  // Remove previous success message
+
+  const prevSuccessMessage = document.querySelector('.error-msg');
+  if (prevSuccessMessage) prevSuccessMessage.remove();
+
+  // Add new success message
+
+  let p = document.createElement('p');
+  p.innerText = msg;
+  p.className = 'mt-2 success-msg';
+  p.style.color = 'green';
+
+  elToAppend.appendChild(p);
+};
 
 const isUser = (username, password) => {
   const user = JSON.parse(localStorage.getItem(username));
@@ -55,10 +51,15 @@ const signIn = (e) => {
 
     window.location.href = '../pages/search.html';
   } else {
-      CreateErrorElement('User not found!', passwordContainer);
+    CreateErrorElement('User not found!', passwordContainer);
   }
 };
 
-const signInButton = document.getElementsByClassName('login-btn')[0];
+const signInButton = document.querySelector('.login-btn');
+const signUpButton = document.querySelector('.signup-btn');
 
 signInButton.addEventListener('click', signIn);
+signUpButton.addEventListener('click', (e) => {
+  e.preventDefault();
+  window.location.href = './signup.html';
+});

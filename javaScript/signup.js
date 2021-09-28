@@ -4,36 +4,32 @@ const CreateErrorElement = (msg, elToAppend) => {
   // Remove previous error message
 
   const prevErrMessage = document.querySelector('.error-msg');
-  console.log(prevErrMessage);
   if (prevErrMessage) prevErrMessage.remove();
-  else {
-    // Add new error message
 
-    let p = document.createElement('p');
-    p.innerText = msg;
-    p.className = 'mt-2 error-msg';
-    p.style.color = 'red';
+  // Add new error message
 
-    elToAppend.appendChild(p);
-  }
+  let p = document.createElement('p');
+  p.innerText = msg;
+  p.className = 'mt-2 error-msg';
+  p.style.color = 'red';
+
+  elToAppend.appendChild(p);
 };
 
 const createSuccessElement = (msg, elToAppend) => {
   // Remove previous success message
 
   const prevSuccessMessage = document.querySelector('.error-msg');
-
   if (prevSuccessMessage) prevSuccessMessage.remove();
-  else {
-    // Add new success message
 
-    let p = document.createElement('p');
-    p.innerText = msg;
-    p.className = 'mt-2 success-msg';
-    p.style.color = 'green';
-  
-    elToAppend.appendChild(p);
-  }
+  // Add new success message
+
+  let p = document.createElement('p');
+  p.innerText = msg;
+  p.className = 'mt-2 success-msg';
+  p.style.color = 'green';
+
+  elToAppend.appendChild(p);
 };
 
 const isUser = (username) => {
@@ -76,12 +72,8 @@ const signUp = (e) => {
     // Create Account
     createNewAccount(username, password, spotifyId);
     createSuccessElement('User created successfully!', spotifyIdContainer);
-
-    // Redirect to Home
-    
-    // window.location.href = '../pages/search.html';
   }
 };
 
-const signUpButton = document.getElementsByClassName('signup-btn')[0];
+const signUpButton = document.querySelector('.signup-btn');
 signUpButton.addEventListener('click', signUp);
