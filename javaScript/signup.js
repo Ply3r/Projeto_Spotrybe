@@ -34,10 +34,10 @@ const signUp = (e) => {
   const password = document.getElementById('password').value;
 
   const user = isUser(username, password);
-  const passwordContainer = document.getElementsByClassName('password-container')[0];
+  const spotifyIdContainer = document.getElementsByClassName('spotify-id-container')[0];
 
   if (user) {
-    CreateErrorElement('User is already registered!', passwordContainer);
+    CreateErrorElement('User is already registered!', spotifyIdContainer);
   } else {
     localStorage.setItem('users', JSON.stringify({
       ...JSON.parse(localStorage.getItem('users')),
@@ -46,7 +46,7 @@ const signUp = (e) => {
       },
     }));
 
-    createSuccessElement('User created successfully!', passwordContainer);
+    createSuccessElement('User created successfully!', spotifyIdContainer);
     // Mudar para home aqui
   }
 };
