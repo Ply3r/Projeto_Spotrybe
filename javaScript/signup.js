@@ -25,7 +25,7 @@ const isUser = (username, password) => {
   return false;
 };
 
-const signIn = (e) => {
+const signUp = (e) => {
   e.preventDefault();
 
   const username = document.getElementById('username').value;
@@ -35,17 +35,20 @@ const signIn = (e) => {
   const passwordContainer = document.getElementsByClassName('password-container')[0];
 
   if (user) {
-    localStorage.setItem('currentUser', user);
-    createSuccessElement('Logged in successfully!', passwordContainer);
-
-    // Mudar para home aqui
+    CreateErrorElement('User is already registered!', passwordContainer);
   } else {
-    if (!document.getElementsByClassName('error-msg')[0]) {
-      CreateErrorElement('User not found!', passwordContainer);
-    }
+    localStorage.setItem('users', JSON.stringify({
+      ...JSON.parse(localStorage.getItem('users')),
+      [username]: {
+        password,
+      },
+    }));
+
+    createSuccessElement('User created successfully!', passwordContainer);
+    // Mudar para home aqui
   }
 };
 
-const signInButton = document.getElementsByClassName('login-btn')[0];
+const signUpButton = document.getElementsByClassName('signup-btn')[0];
 
-signInButton.addEventListener('click', signIn);
+signUpButton.addEventListener('click', signUp);

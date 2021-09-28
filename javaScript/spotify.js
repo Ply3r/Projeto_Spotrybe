@@ -9,8 +9,6 @@ class Spotify {
   }
 
   static async getToken() {
-    console.log('Getting Token');
-    console.time('Token aquired');
 
     const CLIENT_ID = '062ce822e4104fa4827a8db0ee93263d';
     const CLIENT_SECRET = 'e2e8aa8221984bb9959a7e2ef62de1e1';
@@ -27,7 +25,6 @@ class Spotify {
       let data = await response.json();
       this.token = data.access_token;
 
-      console.timeEnd('Token aquired');
       return data.access_token;
     }
   }
@@ -46,7 +43,21 @@ class Spotify {
     })
     
     const data = await response.json();
-    return data;
+    console.log(data);
+    const dados = {
+      name: data.name,
+      tracks: data.tracks.items.reduce((acc,item) => {
+        const objeto = {
+          id: item.track.id,
+          preview_url: item.track.preview_url,
+          artists: item.track.artists,
+          album: item.track.album,
+        }
+        return [...acc, objeto]
+      }, [])
+    }
+
+    return dados;
   }
 
   async getListOfBrowseCategories(numberOfCategories) {
@@ -125,7 +136,26 @@ class Spotify {
   }
 
   async getUserProfileInfo(userId) {
-    const result = await fetch(`https://api.spotify.com/v1/users/${userId}`, {
+    try {
+      const result = await fetch(`https://api.spotify.com/v1/users/${userId}`, {
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${this.token}`,
+          "Content-Type": "application/json"
+        }
+      })
+      console.log(result);
+      const data = await result.json();
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.log('userName invalido');
+      return null;
+    }
+  }
+
+  async getArtistsInfo(artistId) {
+    const result = await fetch(`https://api.spotify.com/v1/artists/${artistId}`, {
       headers: {
         Accept: "application/json",
         Authorization: `Bearer ${this.token}`,
@@ -138,8 +168,8 @@ class Spotify {
     return data;
   }
 
-  async getArtistsInfo(artistId) {
-    const result = await fetch(`https://api.spotify.com/v1/artists/${artistId}`, {
+  async getArtistSongs(artistId) {
+    const result = await fetch(`https://api.spotify.com/v1/artists/${artistId}/top-tracks`, {
       headers: {
         Accept: "application/json",
         Authorization: `Bearer ${this.token}`,
