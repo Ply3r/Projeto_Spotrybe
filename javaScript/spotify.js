@@ -5,12 +5,7 @@ class Spotify {
   }
 
   async init() {
-    console.log('Initializing ...')
-    console.time('Initialization completed')
-
     this.token = await Spotify.getToken();
-
-    console.timeEnd('Initialization completed')
   }
 
   static async getToken() {
