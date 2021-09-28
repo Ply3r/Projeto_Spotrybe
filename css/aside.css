@@ -11,7 +11,7 @@ body {
   height: 100vw;
   width: 100vw;
   display: flex;
-  overflow: hidden;
+  overflow-x: hidden;
   background-color: #272624;
 }
 
