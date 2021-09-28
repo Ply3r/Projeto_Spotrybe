@@ -1,0 +1,57 @@
+main {
+  width: 85vw;
+  height: 100vw;
+}
+
+.hero-search {
+  width: 100%;
+  height: 15%;
+  display: grid;
+  place-items: center;
+  color: white;
+  font-size: 3rem;
+  background-image: linear-gradient(aqua, transparent);
+}
+
+.busca-container {
+  height: 5%;
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.busca-container input {
+  border: none;
+  height: 50%;
+  width: 50%;
+  font-size: 1.5em;
+  border-radius: 30px;
+  padding: 0 20px;
+}
+
+.busca-item {
+  right: 22%;
+  position: absolute;
+}
+
+.grid-container {
+  width: 100%;
+  padding: 25px;
+  height: auto;
+  display: grid;
+  place-items: center;
+  grid-template-columns: repeat(5, 1fr)
+}
+
+.grid-item {
+  background-color: rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  color: white;
+  width: 200px;
+  height: 250px;
+}
+
+.grid-item img {
+  width: 100%;
+}
