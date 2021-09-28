@@ -224,7 +224,7 @@ class Spotify {
 
   async getSeveralTracksById(tracksIds) {
     const tracks = tracksIds.replaceAll(',','%2C')
-    const result = await fetch(`https://api.spotify.com/v1/tracks/${id}?market=BR`, {
+    const result = await fetch(`https://api.spotify.com/v1/tracks?ids=${tracks}&market=BR`, {
       headers: {
         Accept: "application/json",
         Authorization: `Bearer ${this.token}`,
