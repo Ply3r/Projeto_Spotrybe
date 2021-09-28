@@ -8,13 +8,12 @@ window.onload = async () => {
   const trackId = track.tracks.items[0].id;
   await spotTrybe.getTrackById(trackId);
   await spotTrybe.getUserPlaylists('12147540058',5);
-  console.log('playlist')
   console.log(await spotTrybe.getPlaylist('2G73gq2YWPWwToeAwNaD2k'))
-  console.log('fim playlist')
+  console.log('playlist')
   await spotTrybe.getListOfBrowseCategories(5);
+  console.log('fim playlist')
+  await spotTrybe.getCategorysPlaylists('brazil',5)
   await spotTrybe.getListOfNewReleases(5);
-  await spotTrybe.getCategorysPlaylists('rock',5);
-  console.log('aaaa');
   await spotTrybe.getListOfFeaturedPlaylists(1);
   await spotTrybe.getUserProfileInfo('12147540058');
   console.log('tracks');
