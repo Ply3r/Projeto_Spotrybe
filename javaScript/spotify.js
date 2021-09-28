@@ -6,9 +6,7 @@ class Spotify {
   }
 
   async init() {
-    console.log('começo init',this.token)
     this.token = await this.token;
-    console.log('fim init',this.token)
   }
 
   static async getToken() {
@@ -39,15 +37,7 @@ class Spotify {
         "Content-Type": "application/json"
       }
     })
-    console.log('---------------------')
-    console.log({
-      Accept: "application/json",
-      Authorization: 'Bearer ' + this.token,
-      "Content-Type": "application/json"
-    })
-    console.log(response);
     const data = await response.json();
-    console.log(data);
   }
 
   async getListOfBrowseCategories(numberOfCategories) {
@@ -58,9 +48,7 @@ class Spotify {
         "Content-Type": "application/json"
       }
     })
-    console.log(result);
     const data = await result.json();
-    console.log(data);
     return data;
   }
 
@@ -72,9 +60,7 @@ class Spotify {
         "Content-Type": "application/json"
       }
     })
-    console.log(result);
     const data = await result.json();
-    console.log(data);
     return data;
   }
 
@@ -86,14 +72,11 @@ class Spotify {
         "Content-Type": "application/json"
       }
     })
-    console.log(result);
     const data = await result.json();
-    console.log(data);
     return data;
   }
 
   async getNPossibleTracks(name = '', possibleTracks) {
-    console.log('toookeeenn' + this.token);
     const formatedName = name.replaceAll(' ', '%20');
     const response = await fetch(`https://api.spotify.com/v1/search?q=${formatedName}&type=track&market=BR&market=US&limit=${possibleTracks}`, 
     {
@@ -103,7 +86,6 @@ class Spotify {
         "Content-Type": "application/json"
       }
     })
-    console.log(response);
     const data = await response.json();
     return data;
   }
