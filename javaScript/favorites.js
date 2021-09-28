@@ -16,6 +16,24 @@ const getToken = async () => {
   }
 }
 
+function addLocalStorage(id) {
+  if(localStorage.favoritos) {
+    const favoritos = localStorage.getItem('favoritos')
+    const favParse = JSON.parse(favoritos)
+    let json;
+    if (favParse.includes(id)) {
+      const arrFiltrado = favParse.filter((item) => item !== id)
+      json = JSON.stringify(arrFiltrado)
+    } else {
+      json = JSON.stringify([...favParse, id])
+    }
+    localStorage.setItem('favoritos', json)
+  } else {
+    const json = JSON.stringify([id])
+    localStorage.setItem('favoritos', json)
+  }
+}
+
 function makeNewItens(array, clear) {
   const container = document.querySelector('.grid-container')
   const imagemPlayer = document.querySelector('#current-image-player')
@@ -57,6 +75,7 @@ function makeNewItens(array, clear) {
     heart.addEventListener('click', () => {
       if(heart.classList.contains('fas')) {
         heart.className = 'far fa-heart'
+        div.remove()
       } else {
         heart.className = 'fas fa-heart'
       }
