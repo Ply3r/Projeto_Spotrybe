@@ -53,8 +53,10 @@ function makeNewItens(array, clear) {
     }
     const heart = document.createElement('div');
     heart.className = 'far fa-heart'
-    if( arrayOfFavs.includes(id) ) {
-      heart.className = 'fas fa-heart'
+    if (arrayOfFavs) {
+      if( arrayOfFavs.includes(id) ) {
+        heart.className = 'fas fa-heart'
+      }
     }
     heart.addEventListener('click', () => {
       if(heart.classList.contains('fas')) {
