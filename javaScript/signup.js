@@ -1,41 +1,55 @@
 import createAsyncSpotTrybe from './spotify.js';
 
 const CreateErrorElement = (msg, elToAppend) => {
-  let p = document.createElement('p');
-  p.innerText = msg;
-  p.className = 'mt-2 error-msg';
-  p.style.color = 'red';
+  // Remove previous error message
 
-  elToAppend.appendChild(p);
+  const prevErrMessage = document.querySelector('.error-msg');
+  console.log(prevErrMessage);
+  if (prevErrMessage) prevErrMessage.remove();
+  else {
+    // Add new error message
+
+    let p = document.createElement('p');
+    p.innerText = msg;
+    p.className = 'mt-2 error-msg';
+    p.style.color = 'red';
+
+    elToAppend.appendChild(p);
+  }
 };
 
 const createSuccessElement = (msg, elToAppend) => {
-  let p = document.createElement('p');
-  p.innerText = msg;
-  p.className = 'mt-2 success-msg';
-  p.style.color = 'green';
+  // Remove previous success message
 
-  elToAppend.appendChild(p);
+  const prevSuccessMessage = document.querySelector('.error-msg');
+  console.log(prevErrMessage);
+  if (prevErrMessage) prevErrMessage.remove();
+  else {
+    // Add new success message
+
+    let p = document.createElement('p');
+    p.innerText = msg;
+    p.className = 'mt-2 success-msg';
+    p.style.color = 'green';
+  
+    elToAppend.appendChild(p);
+  }
 };
 
-const isUser = (username, password) => {
-  const localUsers = JSON.parse(localStorage.getItem('users'));
+const isUser = (username) => {
+  const localUser = JSON.parse(localStorage.getItem(username));
 
-  if (localUsers) {
-    if (localUsers[username] && localUsers[username].password === password)
-      return localUsers[username];
-  }
-  return false;
+  return localUser ? localUser : false;
 };
 
 const createNewAccount = async (username, password, spotifyId) => {
   const spotTrybe = await createAsyncSpotTrybe();
-  console.log()
-  if (spotifyId) username = (await spotTrybe.getUserProfileInfo(spotifyId)).display_name;
+  let name = username;
+  if (spotifyId) name = (await spotTrybe.getUserProfileInfo(spotifyId)).display_name;
 
   const objeto = {
     [username]: {
-      username,
+      name,
       password,
       spotifyId,
       playlists: [],
@@ -52,29 +66,21 @@ const signUp = (e) => {
   const password = document.getElementById('password').value;
   const spotifyId = document.getElementById('spotify-id').value;
 
-  const user = isUser(username, password);
+  const user = isUser(username);
   const spotifyIdContainer = document.getElementsByClassName('spotify-id-container')[0];
 
   if (user) {
     CreateErrorElement('User is already registered!', spotifyIdContainer);
   } else {
+    // Create Account
     createNewAccount(username, password, spotifyId);
     createSuccessElement('User created successfully!', spotifyIdContainer);
-    // Mudar para home aqui
+
+    // Redirect to Home
+    localStorage.setItem('currentUser', user);
+    window.location.href = '../pages/search.html';
   }
 };
 
 const signUpButton = document.getElementsByClassName('signup-btn')[0];
-
 signUpButton.addEventListener('click', signUp);
-
-async function VerifyLogin() {
-  const user = document.querySelector('#username').value;
-  const pass = document.querySelector('#password').value;
-
-  const usuarioAtual = localStorage.getItem(user);
-
-  if (!usuarioAtual) {
-    localStorage.setItem('currentUser', usuarioAtual);
-  }
-}
