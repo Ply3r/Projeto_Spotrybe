@@ -62,7 +62,8 @@ aside {
   height: 30%;
 }
 
-.menu-container nav {
+.menu-container a {
+  text-decoration: none;
   color: white;
   user-select: none;
   cursor: pointer;
@@ -75,11 +76,11 @@ aside {
   transition: .5s ease;
 }
 
-.menu-container nav:hover {
+.menu-container a:hover {
   color: rgba(255, 255, 255, 0.6);
 }
 
-.menu-container nav.active {
+.menu-container a.active {
   color: black;
   background-color: white;
 }
