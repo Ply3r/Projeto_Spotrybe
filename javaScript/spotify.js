@@ -46,9 +46,6 @@ class Spotify {
     })
     
     const data = await response.json();
-
-    console.log(response.status);
-    console.timeEnd('Playlist fetched');
     return data;
   }
 
@@ -63,7 +60,6 @@ class Spotify {
         "Content-Type": "application/json"
       }
     })
-    console.log(result);
     const data = await result.json();
     console.log(data);
 
@@ -165,9 +161,7 @@ class Spotify {
         "Content-Type": "application/json"
       }
     })
-    console.log(result);
     const data = await result.json();
-    console.log(data);
     return data;
   }
 
@@ -179,9 +173,7 @@ class Spotify {
         "Content-Type": "application/json"
       }
     })
-    console.log(result);
     const data = await result.json();
-    console.log(data);
     return data;
   }
 
@@ -195,7 +187,6 @@ class Spotify {
         "Content-Type": "application/json"
       }
     })
-    console.log(response);
     const data = await response.json();
     return data;
   }

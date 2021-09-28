@@ -1,4 +1,4 @@
-import createAsyncSpotTrybe from "./spotify.js";
+import Spotify from "./spotify.js";
 
 
 window.onload = async () => {
