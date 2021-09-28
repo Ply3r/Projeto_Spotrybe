@@ -2,8 +2,13 @@ import createAsyncSpotTrybe from "./spotify.js";
 
 // dentro da funcao async
 async function getProfileDice(){
+
   const spotTrybe = await createAsyncSpotTrybe();
-  let {display_name, images, followers} = await spotTrybe.getUserProfileInfo('12147540058');  
+
+  const user = JSON.parse(localStorage.getItem('currentUser'));
+
+  
+  let {display_name, images, followers} = await spotTrybe.getUserProfileInfo(user.spotifyId);  
 
   changeProfile(display_name, images[0], followers.total);
 
