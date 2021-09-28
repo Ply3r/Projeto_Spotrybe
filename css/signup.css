@@ -1,0 +1,48 @@
+* {
+  color: white;
+}
+
+header {
+  background-color: #1e1f1d;
+  align-self: stretch;
+}
+
+.purple-gradient-line {
+  background-image: linear-gradient(#6f35cb, transparent);
+  height: 10px;
+}
+
+body {
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  text-align: center;
+  font-size: 4em;
+}
+
+form {
+  width: 400px;
+}
+
+form div {
+    align-self: stretch;
+}
+
+.btn-purple {
+  background-color: #6f35cb;
+  color: white;
+}
+
+.login-btn {
+  border-radius: 25px;
+  font-size: 20px;
+  padding: 8px 50px;
+}
+
+.signup-btn {
+  width: 50%;
+  border-radius: 18px;
+  font-size: 20px;
+}
