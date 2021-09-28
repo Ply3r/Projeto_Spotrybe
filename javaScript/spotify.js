@@ -5,12 +5,7 @@ class Spotify {
   }
 
   async init() {
-    console.log('Initializing ...')
-    console.time('Initialization completed')
-
-    this.token = await Spotify.getToken();
-
-    console.timeEnd('Initialization completed')
+    this.token = await this.token;
   }
 
   static async getToken() {
@@ -49,17 +44,7 @@ class Spotify {
         "Content-Type": "application/json"
       }
     })
-    console.log('---------------------')
-    console.log({
-      Accept: "application/json",
-      Authorization: 'Bearer ' + this.token,
-      "Content-Type": "application/json"
-    })
     const data = await response.json();
-
-    console.log(response.status);
-    console.timeEnd('Playlist fetched');
-    return data;
   }
 
   async getListOfBrowseCategories(numberOfCategories) {
@@ -73,7 +58,6 @@ class Spotify {
         "Content-Type": "application/json"
       }
     })
-    console.log(result);
     const data = await result.json();
     console.log(data);
 
@@ -147,9 +131,7 @@ class Spotify {
         "Content-Type": "application/json"
       }
     })
-    console.log(result);
     const data = await result.json();
-    console.log(data);
     return data;
   }
 
@@ -161,9 +143,7 @@ class Spotify {
         "Content-Type": "application/json"
       }
     })
-    console.log(result);
     const data = await result.json();
-    console.log(data);
     return data;
   }
 
@@ -177,7 +157,6 @@ class Spotify {
         "Content-Type": "application/json"
       }
     })
-    console.log(response);
     const data = await response.json();
     return data;
   }

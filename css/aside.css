@@ -72,6 +72,11 @@ aside {
   padding: 10px 15px;
   border-radius: 30px;
   margin-bottom: 10px;
+  transition: .5s ease;
+}
+
+.menu-container nav:hover {
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .menu-container nav.active {
