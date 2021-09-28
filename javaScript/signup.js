@@ -55,16 +55,22 @@ const signUpButton = document.getElementsByClassName('signup-btn')[0];
 
 signUpButton.addEventListener('click', signUp);
 
-function createNewAccount() {
-
+async function createNewAccount() {
   const spotTrybe = await createAsyncSpotTrybe();
-  const username = document.querySelector('#username').value;
-  const password = document.querySelector('#password').value;
-  const password = document.querySelector('#password').value;
-  const userRetrieved = spotTrybe.getUserProfileInfo('');
+  const user = document.querySelector('#username').value;
+  const pass = document.querySelector('#password').value;
+ // const spotifyId = document.querySelector('#spotify-id').value;
+  const userRetrieved = await spotTrybe.getUserProfileInfo('12147540058');
+  console.log(userRetrieved)
 
-  const [username] = {
-    name: 
+  const objeto ={ 
+    [user]:{
+      name: userRetrieved.display_name,
+      password: pass,
+      spotifyId: '',
+      playlists: []
+    }
   }
 
 }
+createNewAccount();
