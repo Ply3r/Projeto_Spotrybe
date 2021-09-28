@@ -222,6 +222,19 @@ class Spotify {
     return data;
   }
 
+  async getSeveralTracksById(tracksIds) {
+    const tracks = tracksIds.replaceAll(',','%2C')
+    const result = await fetch(`https://api.spotify.com/v1/tracks/${id}?market=BR`, {
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${this.token}`,
+        "Content-Type": "application/json"
+      }
+    })
+    const data = await result.json();
+    return data;
+  }
+
   async getNPossibleTracks(name = '', possibleTracks) {
     const formatedName = name.replaceAll(' ', '%20');
     const response = await fetch(`https://api.spotify.com/v1/search?q=${formatedName}&type=track&market=BR&market=US&limit=${possibleTracks}`, 
