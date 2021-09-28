@@ -1,5 +1,3 @@
-import createAsyncSpotTrybe from './spotify.js';
-
 const clearMessages = () => {
   const messages = ['.error-msg', '.success-msg'];
 
@@ -38,45 +36,25 @@ const createSuccessElement = (msg, elToAppend) => {
 const isUser = (username) => {
   const localUser = JSON.parse(localStorage.getItem(username));
 
-  return localUser ? true : false;
+  return localUser ? localUser : false;
 };
 
-const createNewAccount = async (username, password, spotifyId) => {
-  const spotTrybe = await createAsyncSpotTrybe();
-  let name = username;
-  if (spotifyId) name = (await spotTrybe.getUserProfileInfo(spotifyId)).display_name;
-
-  const objeto = {
-    [username]: {
-      name,
-      password,
-      spotifyId,
-      playlists: [],
-      favorites: [],
-    },
-  };
-  localStorage.setItem(username, JSON.stringify(objeto[username]));
-  localStorage.setItem('currentUser', JSON.stringify(objeto[username]));
-};
-
-const signUp = (e) => {
+const changePassword = (e) => {
   e.preventDefault();
 
   const username = document.getElementById('username').value;
   const password = document.getElementById('password').value;
-  const spotifyId = document.getElementById('spotify-id').value;
 
   const user = isUser(username);
-  const spotifyIdContainer = document.getElementsByClassName('spotify-id-container')[0];
+  const passwordContainer = document.getElementsByClassName('password-container')[0];
 
   if (user) {
-    CreateErrorElement('User is already registered!', spotifyIdContainer);
+    localStorage.setItem(username, JSON.stringify({ ...user, password }));
+    createSuccessElement('Password is changed!', passwordContainer);
   } else {
-    // Create Account
-    createNewAccount(username, password, spotifyId);
-    createSuccessElement('User created successfully!', spotifyIdContainer);
+    CreateErrorElement('There is no user with this username!', passwordContainer);
   }
 };
 
-const signUpButton = document.querySelector('.signup-btn');
-signUpButton.addEventListener('click', signUp);
+const changePwdButton = document.querySelector('.change-pwd-btn');
+changePwdButton.addEventListener('click', changePassword);
