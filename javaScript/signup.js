@@ -1,3 +1,5 @@
+import createAsyncSpotTrybe from "./spotify.js"
+
 const CreateErrorElement = (msg, elToAppend) => {
   let p = document.createElement('p');
   p.innerText = msg;
@@ -52,3 +54,17 @@ const signUp = (e) => {
 const signUpButton = document.getElementsByClassName('signup-btn')[0];
 
 signUpButton.addEventListener('click', signUp);
+
+function createNewAccount() {
+
+  const spotTrybe = await createAsyncSpotTrybe();
+  const username = document.querySelector('#username').value;
+  const password = document.querySelector('#password').value;
+  const password = document.querySelector('#password').value;
+  const userRetrieved = spotTrybe.getUserProfileInfo('');
+
+  const [username] = {
+    name: 
+  }
+
+}
