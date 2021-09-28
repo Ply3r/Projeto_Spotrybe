@@ -22,8 +22,8 @@ const createSuccessElement = (msg, elToAppend) => {
   // Remove previous success message
 
   const prevSuccessMessage = document.querySelector('.error-msg');
-  console.log(prevErrMessage);
-  if (prevErrMessage) prevErrMessage.remove();
+
+  if (prevSuccessMessage) prevSuccessMessage.remove();
   else {
     // Add new success message
 
@@ -39,7 +39,7 @@ const createSuccessElement = (msg, elToAppend) => {
 const isUser = (username) => {
   const localUser = JSON.parse(localStorage.getItem(username));
 
-  return localUser ? localUser : false;
+  return localUser ? true : false;
 };
 
 const createNewAccount = async (username, password, spotifyId) => {
@@ -57,6 +57,7 @@ const createNewAccount = async (username, password, spotifyId) => {
     },
   };
   localStorage.setItem(username, JSON.stringify(objeto[username]));
+  localStorage.setItem('currentUser', objeto[username]);
 };
 
 const signUp = (e) => {
@@ -77,8 +78,8 @@ const signUp = (e) => {
     createSuccessElement('User created successfully!', spotifyIdContainer);
 
     // Redirect to Home
-    localStorage.setItem('currentUser', user);
-    window.location.href = '../pages/search.html';
+    
+    // window.location.href = '../pages/search.html';
   }
 };
 
