@@ -9,8 +9,6 @@ class Spotify {
   }
 
   static async getToken() {
-    console.log('Getting Token');
-    console.time('Token aquired');
 
     const CLIENT_ID = '062ce822e4104fa4827a8db0ee93263d';
     const CLIENT_SECRET = 'e2e8aa8221984bb9959a7e2ef62de1e1';
@@ -27,7 +25,6 @@ class Spotify {
       let data = await response.json();
       this.token = data.access_token;
 
-      console.timeEnd('Token aquired');
       return data.access_token;
     }
   }
@@ -140,6 +137,20 @@ class Spotify {
 
   async getArtistsInfo(artistId) {
     const result = await fetch(`https://api.spotify.com/v1/artists/${artistId}`, {
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${this.token}`,
+        "Content-Type": "application/json"
+      }
+    })
+    console.log(result);
+    const data = await result.json();
+    console.log(data);
+    return data;
+  }
+
+  async getArtistSongs(artistId) {
+    const result = await fetch(`https://api.spotify.com/v1/artists/${artistId}/top-tracks`, {
       headers: {
         Accept: "application/json",
         Authorization: `Bearer ${this.token}`,
