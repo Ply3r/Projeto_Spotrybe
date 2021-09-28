@@ -1,12 +1,18 @@
+const clearMessages = () => {
+  const messages = ['.error-msg', '.success-msg'];
+
+  messages.forEach((msg) => {
+    const messageElement = document.querySelector(msg);
+    if (messageElement) messageElement.remove();
+  });
+};
+
 const CreateErrorElement = (msg, elToAppend) => {
   // Remove previous error message
-
-  const prevErrMessage = document.querySelector('.error-msg');
-  if (prevErrMessage) prevErrMessage.remove();
+  clearMessages();
 
   // Add new error message
-
-  let p = document.createElement('p');
+  const p = document.createElement('p');
   p.innerText = msg;
   p.className = 'mt-2 error-msg';
   p.style.color = 'red';
@@ -16,13 +22,10 @@ const CreateErrorElement = (msg, elToAppend) => {
 
 const createSuccessElement = (msg, elToAppend) => {
   // Remove previous success message
-
-  const prevSuccessMessage = document.querySelector('.error-msg');
-  if (prevSuccessMessage) prevSuccessMessage.remove();
+  clearMessages();
 
   // Add new success message
-
-  let p = document.createElement('p');
+  const p = document.createElement('p');
   p.innerText = msg;
   p.className = 'mt-2 success-msg';
   p.style.color = 'green';
