@@ -20,6 +20,7 @@ function addLocalStorage(id) {
 }
 
 function makeNewItens(array, clear) {
+  console.log(array)
   const container = document.querySelector('.grid-container')
   const imagemPlayer = document.querySelector('#current-image-player')
   const audio = document.querySelector('#audio');
@@ -84,12 +85,25 @@ const getSearch = async (query, limite, slice = 0) => {
     slice ? makeNewItens(array) : makeNewItens(array, true)
   }
 }
+
+const getTrending = async () => {
+  const spotTrybe = await createAsyncSpotTrybe();
+  let array = await spotTrybe.getPlaylist('2G73gq2YWPWwToeAwNaD2k')
+    .then(({ tracks }) => tracks)
+    .then(({ items }) => items)
+    .then((arr) => arr.map((item) => item.track))
+  makeNewItens(array, true)
+}
   
 function getSearchInput() {
   const search = document.getElementById('search');
   search.addEventListener('keyup', () => {
     const { value } = search
-    getSearch(value, 20)
+    if (value !== '') {
+      getSearch(value, 20)
+    } else {
+      getTrending()
+    }
   })
 }
 getSearchInput();
