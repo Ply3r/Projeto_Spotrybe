@@ -17,4 +17,10 @@ window.onload = async () => {
   console.log('aaaa');
   await spotTrybe.getListOfFeaturedPlaylists(1);
   await spotTrybe.getUserProfileInfo('12147540058');
+  console.log('tracks');
+  await spotTrybe.getSeveralTracksById('7ouMYWpwJ422jRcDASZB7P,4VqPOruhp5EdPBeR92t6lQ,2takcwOaAZWiXQijPHIx7B')
 }
+
+'https://api.spotify.com/v1/tracks?ids=7ouMYWpwJ422jRcDASZB7P%2C4VqPOruhp5EdPBeR92t6lQ%2C2takcwOaAZWiXQijPHIx7B&market=ES'
+
+'https://api.spotify.com/v1/tracks/7ouMYWpwJ422jRcDASZB7P%2C4VqPOruhp5EdPBeR92t6lQ%2C2takcwOaAZWiXQijPHIx7B&market=BR'
