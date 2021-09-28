@@ -44,7 +44,9 @@ class Spotify {
         "Content-Type": "application/json"
       }
     })
+    
     const data = await response.json();
+    return data;
   }
 
   async getListOfBrowseCategories(numberOfCategories) {
@@ -119,6 +121,34 @@ class Spotify {
     console.log(data);
 
     console.timeEnd('getListOfFeaturedPlaylists done')
+    return data;
+  }
+
+  async getUserProfileInfo(userId) {
+    const result = await fetch(`https://api.spotify.com/v1/users/${userId}`, {
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${this.token}`,
+        "Content-Type": "application/json"
+      }
+    })
+    console.log(result);
+    const data = await result.json();
+    console.log(data);
+    return data;
+  }
+
+  async getArtistsInfo(artistId) {
+    const result = await fetch(`https://api.spotify.com/v1/artists/${artistId}`, {
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${this.token}`,
+        "Content-Type": "application/json"
+      }
+    })
+    console.log(result);
+    const data = await result.json();
+    console.log(data);
     return data;
   }
 
