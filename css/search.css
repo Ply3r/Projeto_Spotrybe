@@ -77,6 +77,17 @@ main {
   height: 10%;
 }
 
+.grid-item {
+  position:relative;
+}
+
+.fa-heart::before {
+  text-shadow: 0 0 1em black;
+  position: absolute;
+  top: 5%;
+  right: 10%;
+}
+
 .grid-container::-webkit-scrollbar {
   width: 10px;
 }

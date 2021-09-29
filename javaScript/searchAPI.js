@@ -133,7 +133,7 @@ getSearchInput();
 function verifyScroll() {
   const container = document.querySelector('.grid-container')
   container.addEventListener('scroll', () => {
-    const isTheEnd = (container.scrollHeight - container.scrollTop) === 569;
+    const isTheEnd = (container.scrollHeight - container.scrollTop) >= 550;
     if(isTheEnd) {
       const { value } = document.getElementById('search');
       limit += 20

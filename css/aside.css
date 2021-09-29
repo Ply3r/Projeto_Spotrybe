@@ -73,6 +73,10 @@ aside {
   background-color: black;
 }
 
+a .fa-heart::before {
+  position: static !important;
+}
+
 .menu-container {
   display: flex;
   flex-direction: column;
