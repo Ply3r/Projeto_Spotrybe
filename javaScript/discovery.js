@@ -1,6 +1,24 @@
 import createAsyncSpotTrybe from "./spotify.js";
 const MainTitle = document.querySelector('#main-title');
 
+function addLocalStorage(id) {
+  if(localStorage.favoritos) {
+    const favoritos = localStorage.getItem('favoritos')
+    const favParse = JSON.parse(favoritos)
+    let json;
+    if (favParse.includes(id)) {
+      const arrFiltrado = favParse.filter((item) => item !== id)
+      json = JSON.stringify(arrFiltrado)
+    } else {
+      json = JSON.stringify([...favParse, id])
+    }
+    localStorage.setItem('favoritos', json)
+  } else {
+    const json = JSON.stringify([id])
+    localStorage.setItem('favoritos', json)
+  }
+}
+
 async function getTracks(id, titleName) {
   MainTitle.textContent = titleName;
   const imagemPlayer = document.querySelector('#current-image-player')
@@ -16,7 +34,7 @@ async function getTracks(id, titleName) {
     const div = createDiv(id,'grid-item');
     
     const newName = await spotTrybe.getTrackById(id);
-    appendToElement(div,[createImage(album.images[0].url),createName(newName.name),createGeneric(artistaPrincipal,'h4')]);
+    appendToElement(div,[createImage(album.images[0].url),createName(newName.name),createGeneric(artistaPrincipal,'h4'), createHeart(id)]);
     
     if(preview_url) {
       div.addEventListener('click', () => {
@@ -26,6 +44,26 @@ async function getTracks(id, titleName) {
     }
     container.append(div)
   });
+}
+
+function createHeart(id) {
+  const getFav = localStorage.getItem('favoritos');
+  const arrayOfFavs = JSON.parse(getFav);
+  const heart = createDiv('heart', 'far fa-heart');
+  if (arrayOfFavs) {
+    if( arrayOfFavs.includes(id) ) {
+      heart.className = 'fas fa-heart'
+    }
+  }
+  heart.addEventListener('click', () => {
+    if(heart.classList.contains('fas')) {
+      heart.className = 'far fa-heart'
+    } else {
+      heart.className = 'fas fa-heart'
+    }
+    addLocalStorage(id)
+  })
+  return heart
 }
 
 const getPlaylist = async (id, titleName) => {
