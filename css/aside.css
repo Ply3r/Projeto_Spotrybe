@@ -8,18 +8,29 @@
 }
 
 body {
-  height: 100vw;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   display: flex;
   overflow: hidden;
   background-color: #272624;
 }
 
+main {
+  height: 100vmax;
+  width: 85vw;
+  flex-shrink: 10;
+}
+
 aside {
+  display: flex;
   width: 15vw;
-  height: 100vw;
   z-index: 10;
   background-color: #40187F;
+  display: flex;
+  height: 100vh;
+  flex-grow: 2;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .logo-container {
@@ -31,6 +42,7 @@ aside {
   color: white;
   align-items: center;
   font-size: 1.5em;
+  margin-top: 20px;
 }
 
 .user-container {
@@ -59,7 +71,9 @@ aside {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 30%;
+  margin: 0;
+  height: 0;
+  padding-bottom: 300px;
 }
 
 .menu-container a {
@@ -86,9 +100,15 @@ aside {
 }
 
 .image-container-player {
-  height: 22vh;
-  display: grid;
-  place-items: center;
+  display: flex;
+  bottom: 0%;
+  margin-bottom: 50px;
+  justify-content: center;
+  height: 15vw;
+  width: 15vw;
+  flex-shrink: 0;
+  flex-grow: 0;
+  
 }
 
 .image-container-player img{
@@ -115,4 +135,20 @@ player audio {
 
 audio::-webkit-media-controls-panel {
   background: transparent ! important;
+}
+
+@media (max-width: 1500px) {
+  .logo-container{
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 1200px) {
+  .logo-container-title {
+    display:none;
+  }
+
+  .menu-label{
+    display: none;
+  }
 }
