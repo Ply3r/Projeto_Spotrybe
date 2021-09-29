@@ -1,42 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Spotrybe | Favorites</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="../css/aside.css">
-  <link rel="stylesheet" href="../css/discovery.css">
-</head>
-<body>
-  <aside>
-    <div class="logo-container">
-      <i class="fab fa-spotify"></i>
-      <h1 class='logo-container-title'>Spotrybe</h1>
-    </div>
-    <div class="menu-container">
-      <a href="./profile.html"><span><i class="fas fa-home"></i></span> <span class='menu-label'>Home</span></a>
-      <a href="./search.html"> <span><i class="fas fa-search"></i></span> <span class='menu-label'>Search</span></a>
-      <a href="./favorites.html"> <span><i class="fas fa-heart"></i></span> <span class='menu-label'>Liked Songs</span></a>
-      <a class="active"> <span><i class="fas fa-rocket"></i></span> <span class='menu-label'>Discovery</span></a>
-    </div>
-    <div class="image-container-player">
-      <img id="current-image-player" src="https://macmagazine.com.br/wp-content/uploads/2021/03/30-spotify-800x600.jpg" alt="">
-    </div>
-  </aside>
-  <main>
-    <div class="hero-search">
-      <h1>Discovery</h1>
-    </div>
-    <h2 id="main-title">Categorias:</h2>
-    <div class="grid-container">
-
-    </div>
-  </main>
-  <player>
-    <audio src="" controls id="audio"></audio>
-  </player>
-  <script src="../javaScript/discovery.js" type="module"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spotrybe | Favorites</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+      crossorigin="anonymous"
+    />
+    <!-- Fontawesome CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+      integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Page CSS -->
+    <link rel="stylesheet" href="../css/aside.css" />
+    <link rel="stylesheet" href="../css/discovery.css" />
+  </head>
+  <body>
+    <aside>
+      <div class="logo-container">
+        <i class="fab fa-spotify"></i>
+        <h1 class="logo-container-title">Spotrybe</h1>
+      </div>
+      <div class="menu-container">
+        <a href="./profile.html"
+          ><span><i class="fas fa-home"></i></span> <span class="menu-label">Home</span></a
+        >
+        <a href="./search.html">
+          <span><i class="fas fa-search"></i></span> <span class="menu-label">Search</span></a
+        >
+        <a href="./favorites.html">
+          <span><i class="fas fa-heart"></i></span> <span class="menu-label">Liked Songs</span></a
+        >
+        <a class="active">
+          <span><i class="fas fa-rocket"></i></span> <span class="menu-label">Discovery</span></a
+        >
+      </div>
+      <div class="image-container-player">
+        <img
+          id="current-image-player"
+          src="https://macmagazine.com.br/wp-content/uploads/2021/03/30-spotify-800x600.jpg"
+          alt=""
+        />
+      </div>
+    </aside>
+    <main>
+      <div class="hero-search">
+        <h1>Discovery</h1>
+      </div>
+      <h2 id="main-title">Categorias:</h2>
+      <div class="grid-container"></div>
+    </main>
+    <player>
+      <!-- <audio src="" controls id="audio"></audio> -->
+      <div class="audio-player">
+        <div class="player-controls">
+          <span class="play-btn"><i class="fas fa-play-circle"></i></span>
+          <span class="d-none pause-btn"><i class="fas fa-pause-circle"></i></span>
+        </div>
+        <div class="player-progress-bar"></div>
+      </div>
+    </player>
+    <!-- Bootstrap JS -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Page JS-->
+    <script src="../javaScript/discovery.js" type="module"></script>
+  </body>
 </html>

@@ -111,3 +111,16 @@ function cleanContentAndGetTracks(id, name) {
 window.onload = () => {
   getCategories()
 }
+
+// New Player - Rafael
+
+const playBtn = document.querySelector('.play-btn');
+const pauseBtn = document.querySelector('.pause-btn');
+
+const togglePlay = () => {
+  playBtn.classList.toggle('d-none');
+  pauseBtn.classList.toggle('d-none');
+}
+
+playBtn.addEventListener('click', togglePlay);
+pauseBtn.addEventListener('click', togglePlay);
