@@ -1,41 +1,55 @@
-.player-controls {
-    font-size: 2.5em;
-    color: white;
-    
-    width: 100px;
-  }
-  
-  .player-controls span {
-    cursor:pointer;
-  }
-  
-  .next-btn,
-  .prev-btn {
-    font-size: 0.75em;
-  }
-  
-  .progress {
-    width: 950px;
-    height: 5px;
-  }
-  
-  .progress-bar {
-    background-color: #6f35cb;
-    transition-duration: 1s;
-    transition: 1.5s ease;
-  }
+player {
+  justify-content: start;
+  background-color: #1e1f1d;
+  margin-left: 15vw;
+}
 
-  .progress-ball {
-    position: absolute;
-    right: 67.8%;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    background-color: white;
-  }
+.player-controls {
+  margin-left: 1vw;
+  font-size: 2.5em;
+  color: white;
+  flex-basis: 30%;
+  width: 10vw;
+  max-width: 100px;
+}
+
+.player-controls span {
+  cursor: pointer;
+}
+
+.next-btn,
+.prev-btn {
+  font-size: 0.75em;
+}
+
+.progress {
+  width: 30vw;
+  flex-basis: 70%;
+  max-width: 300px;
+  height: 5px;
+}
+
+.progress-bar {
+  background-color: #6f35cb;
+}
 
 @media screen and (max-width: 600px) {
-  .progress, .player-current-time, .player-max-time, div.player-progress-bar {
-    display: none !important;
+  player {
+    margin-left: 0;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  player {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+  }
+
+  .player-controls {
+    width: 100vw;
+    margin-left: 0;
   }
 }

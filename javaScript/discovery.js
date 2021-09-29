@@ -1,4 +1,4 @@
-import { createAudioElement, playerProgressHandler, togglePlay } from './player.js'
+import { createAudioElement } from './player.js'
 
 /*
 createAudioElement(preview_url);
