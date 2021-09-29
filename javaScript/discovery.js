@@ -1,5 +1,11 @@
 import { createAudioElement, playerProgressHandler, togglePlay } from './player.js'
 import createAsyncSpotTrybe from "./spotify.js";
+
+/*
+createAudioElement(preview_url);
+//audio.src = preview_url;
+*/
+
 const MainTitle = document.querySelector('#main-title');
 let position = '';
 let lastPlaylist = null;
