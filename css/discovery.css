@@ -52,7 +52,7 @@
 }
 
 .grid-item {
-  height: 48vh;
+  height: 45vh;
   width: 18vw;
   cursor: pointer;
   transition: .5s ease;
@@ -108,7 +108,7 @@
   }
 
   .grid-item {
-    height: 40vh;
+    height: 45vh;
     width: 25vw;
   }
 }
@@ -127,7 +127,7 @@
   }
 
   .grid-item {
-    height: 52vh;
+    height: 56vh;
     width: 70vw;
   }
 

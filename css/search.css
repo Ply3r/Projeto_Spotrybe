@@ -103,7 +103,7 @@ main {
   }
 
   .grid-item {
-    height: 40vh;
+    height: 45vh;
     width: 25vw;
   }
 }
@@ -114,7 +114,7 @@ main {
   }
 
   .hero-search {
-    height: 20vh;
+    height: 25vh;
   }
 
   .grid-container {
@@ -122,7 +122,7 @@ main {
   }
 
   .grid-item {
-    height: 52vh;
+    height: 56vh;
     width: 70vw;
   }
 
