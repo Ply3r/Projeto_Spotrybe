@@ -6,6 +6,8 @@ const getCategories = async () => {
   createAndAppendCategories(items)
 }
 
+const 
+
 const getPlaylist = async (id) => {
   const spotTrybe = await createAsyncSpotTrybe();
   const container = document.querySelector('.grid-container')
@@ -68,6 +70,12 @@ function cleanContentAndGetPlaylist(id) {
   container.innerHTML = '';
   console.log(id);
   getPlaylist(id);
+}
+
+function cleanContentAndGetTracks(id) {
+  const container = document.querySelector('.grid-container');
+  container.innerHTML = '';
+  getTracks(id);
 }
 
 window.onload = () => {
