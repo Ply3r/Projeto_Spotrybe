@@ -1,50 +1,17 @@
-const getToken = async () => {
-  const CLIENT_ID = '062ce822e4104fa4827a8db0ee93263d';
-  const CLIENT_SECRET = 'e2e8aa8221984bb9959a7e2ef62de1e1';
-  const API_TOKEN = 'https://accounts.spotify.com/api/token';
-  const response = await fetch(API_TOKEN, {
-    body: 'grant_type=client_credentials',
-    headers: {
-      Authorization: 'Basic '+ btoa(`${CLIENT_ID}:${CLIENT_SECRET}`),
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
-    method : 'POST',
-  })
-  if (response.status == 200) {
-    let data = await response.json();
-    return data.access_token;
-  }
-}
+import {addLocalStorage, getCurrentFav} from './localStorageHandler.js'
+import { createAudioElement } from './player.js';
+import createAsyncSpotTrybe from './spotify.js';
 
-function addLocalStorage(id) {
-  if(localStorage.favoritos) {
-    const favoritos = localStorage.getItem('favoritos')
-    const favParse = JSON.parse(favoritos)
-    let json;
-    if (favParse.includes(id)) {
-      const arrFiltrado = favParse.filter((item) => item !== id)
-      json = JSON.stringify(arrFiltrado)
-    } else {
-      json = JSON.stringify([...favParse, id])
-    }
-    localStorage.setItem('favoritos', json)
-  } else {
-    const json = JSON.stringify([id])
-    localStorage.setItem('favoritos', json)
-  }
-}
 
 function makeNewItens(array, clear) {
   const container = document.querySelector('.grid-container')
   const imagemPlayer = document.querySelector('#current-image-player')
-  const audio = document.querySelector('#audio');
   if (clear) {
     container.innerHTML = '';
     limit = 20
   }
+  const arrayOfFavs = getCurrentFav();
   array.forEach(({ name, id, artists, preview_url, album }) => {
-    const getFav = localStorage.getItem('favoritos')
-    const arrayOfFavs = JSON.parse(getFav);
     const artistaPrincipal = artists
       .map((artista) => artista.name)
       .join(', ')
@@ -62,7 +29,8 @@ function makeNewItens(array, clear) {
     if(preview_url) {
       div.addEventListener('click', () => {
         imagemPlayer.src = img;
-        audio.src = preview_url;
+        imagemPlayer.style.visibility = 'visible'
+        createAudioElement(preview_url)
       })
     }
     const heart = document.createElement('div');
@@ -75,11 +43,11 @@ function makeNewItens(array, clear) {
     heart.addEventListener('click', () => {
       if(heart.classList.contains('fas')) {
         heart.className = 'far fa-heart'
-        div.remove()
       } else {
         heart.className = 'fas fa-heart'
       }
-      addLocalStorage(id)
+      addLocalStorage(id);
+      getItemFavoritos();
     })
     div.append(imagemContainer)
     div.appendChild(h2)
@@ -89,33 +57,14 @@ function makeNewItens(array, clear) {
   })
 }
 
-const getTracksById = async (array) => {
-  const token = await getToken();
-  const formatoCorreto = array.join('%2C');
-  const res = await fetch(`https://api.spotify.com/v1/tracks?ids=${formatoCorreto}&market=US`, {
-  headers: {
-    Accept: "application/json",
-    Authorization: `Bearer ${token}`,
-    "Content-Type": "application/json"
-  }})
-    .then((res) => res.json())
-    .then(({ tracks }) => tracks)
-  makeNewItens(res);
+const getItemFavoritos = async () => {
+  document.querySelector('.grid-container').innerHTML = '';
+  const favs = getCurrentFav();
+  const spotTrybe = await createAsyncSpotTrybe();
+  const itens = await spotTrybe.getSeveralTracksById(favs.toString())
+  makeNewItens(itens.tracks);
 }
-
-const getItemFavoritos = async (array) => {
-  const itens = await getTracksById(array)
-  console.log(itens)
-}
-
-const getFavorites = () => {
-  if(localStorage.favoritos) {
-    const fav =  localStorage.getItem('favoritos');
-    const parseFav = JSON.parse(fav);
-    getItemFavoritos(parseFav);
-  }
-} 
 
 window.onload = () => {
-  getFavorites();
+  getItemFavoritos();
 }

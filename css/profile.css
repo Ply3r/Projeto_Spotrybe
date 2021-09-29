@@ -6,7 +6,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: sans-serif;
+  font-family: Montserrat, sans-serif;
 }
 
 
@@ -20,12 +20,17 @@ main {
   margin-top: 10vw;
 }
 
-aside {
-  justify-content: flex-start !important;
-}
 
-.logo-container {
-  margin-bottom: 6vh;
+.sign-out {
+  width: 80%;
+  padding: 10px 15px;
+  border-radius: 30px;
+  margin-bottom: 40px;
+  
+  align-self: center;
+  justify-self: center;
+  text-align: center;
+  width: 95%;
 }
 
 main .profile {

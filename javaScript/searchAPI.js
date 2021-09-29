@@ -1,70 +1,31 @@
 import createAsyncSpotTrybe from './spotify.js'
+import { createAudioElement } from './player.js';
+import {addLocalStorage, getCurrentFav} from './localStorageHandler.js'
 let limit = 20;
-
-function addLocalStorage(id) {
-  if(localStorage.favoritos) {
-    const favoritos = localStorage.getItem('favoritos')
-    const favParse = JSON.parse(favoritos)
-    let json;
-    if (favParse.includes(id)) {
-      const arrFiltrado = favParse.filter((item) => item !== id)
-      json = JSON.stringify(arrFiltrado)
-    } else {
-      json = JSON.stringify([...favParse, id])
-    }
-    localStorage.setItem('favoritos', json)
-  } else {
-    const json = JSON.stringify([id])
-    localStorage.setItem('favoritos', json)
-  }
-}
+console.log(JSON.parse(localStorage.currentUser));
 
 function makeNewSearch(array, clear) {
   const container = document.querySelector('.grid-container')
   const imagemPlayer = document.querySelector('#current-image-player')
-  const audio = document.querySelector('#audio');
   if (clear) {
     container.innerHTML = '';
     limit = 20
   }
   array.forEach(({ name, id, artists, preview_url, album }) => {
-    const artistas = artists
-      .map((artista) => artista.name)
-      .join(', ')
     const { images } = album;
     const img = images[0].url
-    const div = createDiv(id, 'grid-item')
-    if(preview_url) {
-      div.addEventListener('click', () => {
-        imagemPlayer.src = img;
-        audio.src = preview_url;
-      })
-    }
-    const heart = makeHeart();
-    appendElements(div, [createImg(img), createText('h2', name), createText('h4', artistas), heart])
-    container.append(div)
-  })
-}
-
-function makeTop50(array) {
-  const container = document.querySelector('.grid-container')
-  container.innerHTML = '';
-  const imagemPlayer = document.querySelector('#current-image-player')
-  const audio = document.querySelector('#audio');
-  console.log(array)
-  array.forEach(({ id, artists, preview_url, album: { name, images } }) => {
     const artistas = artists
       .map((artista) => artista.name)
       .join(', ')
-    const img = images[1].url
     const div = createDiv(id, 'grid-item')
     if(preview_url) {
       div.addEventListener('click', () => {
         imagemPlayer.src = img;
-        audio.src = preview_url;
+        imagemPlayer.style.visibility = 'visible'
+        createAudioElement(preview_url)
       })
     }
-    const heart = makeHeart();
+    const heart = makeHeart(id);
     appendElements(div, [createImg(img), createText('h2', name), createText('h4', artistas), heart])
     container.append(div)
   })
@@ -90,8 +51,7 @@ function createDiv(id, className) {
 }
 
 function makeHeart(id) {
-  const getFav = localStorage.getItem('favoritos');
-  const arrayOfFavs = JSON.parse(getFav);
+  const arrayOfFavs = getCurrentFav();
   const heart = createDiv('heart', 'far fa-heart');
   if (arrayOfFavs) {
     if( arrayOfFavs.includes(id) ) {
@@ -127,6 +87,29 @@ const getSearch = async (query, limite, slice = 0) => {
   }
 }
 
+function makeTop50(array) {
+  const container = document.querySelector('.grid-container')
+  container.innerHTML = '';
+  const imagemPlayer = document.querySelector('#current-image-player')
+  array.forEach(({ id, artists, preview_url, album: { name, images } }) => {
+    const artistas = artists
+      .map((artista) => artista.name)
+      .join(', ')
+    const img = images[1].url
+    const div = createDiv(id, 'grid-item')
+    if(preview_url) {
+      div.addEventListener('click', () => {
+        imagemPlayer.src = img;
+        imagemPlayer.style.visibility = 'visible'
+        createAudioElement(preview_url);
+      })
+    }
+    const heart = makeHeart(id);
+    appendElements(div, [createImg(img), createText('h2', name), createText('h4', artistas), heart])
+    container.append(div)
+  })
+}
+
 const getTop50 = async () => {
   const spotTrybe = await createAsyncSpotTrybe();
   const array = await spotTrybe.getPlaylist('37i9dQZEVXbMDoHDwVN2tF')
@@ -139,9 +122,9 @@ function getSearchInput() {
   search.addEventListener('keyup', () => {
     const { value } = search
     if (!value) {
-      getTop50()
+      getTop50();
     } else {
-      getSearch(value, 20)
+      getSearch(value, 20);
     }
   })
 }
@@ -161,5 +144,7 @@ function verifyScroll() {
 verifyScroll();
 
 window.onload = () => {
-  getTop50()
+  getTop50();
 }
+
+export { getCurrentFav, addLocalStorage };
