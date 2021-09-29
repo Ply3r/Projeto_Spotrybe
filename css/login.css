@@ -1,5 +1,6 @@
 * {
   color: white;
+  background-color: #272624;
 }
 
 header {
@@ -8,6 +9,8 @@ header {
 }
 
 body {
+  background-color: #272624;
+  display: flex;
   flex-direction: column;
   align-items: center;
 }

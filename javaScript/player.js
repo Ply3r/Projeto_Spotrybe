@@ -12,10 +12,12 @@ const createAudioElement = (link) => {
   document.body.appendChild(audio);
 };
 
+const getCurrentTime = (music) => music.currentTime.toString().padStart(2, '0');
+
 const playerProgressHandler = (currentMusic) => {
   const currentTimeSpan = document.querySelector('.player-current-time');
   const progressBar = document.querySelector('.progress-bar');
-  const currentTimeByMusic = parseInt(currentMusic.currentTime).toString().padStart(2, '0');
+  const currentTimeByMusic = getCurrentTime(currentMusic);
 
   currentTimeSpan.innerText = `00:${currentTimeByMusic}`;
   progressBar.ariaValueNow = currentTimeByMusic;
