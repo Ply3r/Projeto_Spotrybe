@@ -18,7 +18,7 @@
 
 .grid-container {
   width: 100%;
-  height: 60vh;
+  height: 70vh;
   overflow: auto;
   padding: 25px;
   display: grid;
@@ -30,6 +30,7 @@
 }
 
 .grid-item {
+  height: 400px;
   cursor: pointer;
   transition: .5s ease;
   text-align: center;
@@ -37,6 +38,12 @@
 
 .grid-item img {
   width: 100%;
+}
+
+.grid-item .fa-heart {
+  width: 85%;
+  text-align: end;
+  height: 10%;
 }
 
 .grid-item:hover {

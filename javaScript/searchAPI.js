@@ -19,8 +19,7 @@ function addLocalStorage(id) {
   }
 }
 
-function makeNewItens(array, clear) {
-  console.log(array)
+function makeNewSearch(array, clear) {
   const container = document.querySelector('.grid-container')
   const imagemPlayer = document.querySelector('#current-image-player')
   const audio = document.querySelector('#audio');
@@ -29,49 +28,89 @@ function makeNewItens(array, clear) {
     limit = 20
   }
   array.forEach(({ name, id, artists, preview_url, album }) => {
-    const getFav = localStorage.getItem('favoritos')
-    const arrayOfFavs = JSON.parse(getFav);
-    const artistaPrincipal = artists
+    const artistas = artists
       .map((artista) => artista.name)
       .join(', ')
     const { images } = album;
     const img = images[0].url
-    const imagemContainer = document.createElement('img')
-    imagemContainer.src = img;
-    const h2 = document.createElement('h2')
-    h2.innerText = name;
-    const h4 = document.createElement('h4')
-    h4.innerText = artistaPrincipal;
-    const div = document.createElement('div')
-    div.className = 'grid-item'
-    div.id = id;
+    const div = createDiv(id, 'grid-item')
     if(preview_url) {
       div.addEventListener('click', () => {
         imagemPlayer.src = img;
         audio.src = preview_url;
       })
     }
-    const heart = document.createElement('div');
-    heart.className = 'far fa-heart'
-    if (arrayOfFavs) {
-      if( arrayOfFavs.includes(id) ) {
-        heart.className = 'fas fa-heart'
-      }
-    }
-    heart.addEventListener('click', () => {
-      if(heart.classList.contains('fas')) {
-        heart.className = 'far fa-heart'
-      } else {
-        heart.className = 'fas fa-heart'
-      }
-      addLocalStorage(id)
-    })
-    div.append(imagemContainer)
-    div.appendChild(h2)
-    div.appendChild(h4)
-    div.appendChild(heart)
+    const heart = makeHeart();
+    appendElements(div, [createImg(img), createText('h2', name), createText('h4', artistas), heart])
     container.append(div)
   })
+}
+
+function makeTop50(array) {
+  const container = document.querySelector('.grid-container')
+  container.innerHTML = '';
+  const imagemPlayer = document.querySelector('#current-image-player')
+  const audio = document.querySelector('#audio');
+  console.log(array)
+  array.forEach(({ id, artists, preview_url, album: { name, images } }) => {
+    const artistas = artists
+      .map((artista) => artista.name)
+      .join(', ')
+    const img = images[1].url
+    const div = createDiv(id, 'grid-item')
+    if(preview_url) {
+      div.addEventListener('click', () => {
+        imagemPlayer.src = img;
+        audio.src = preview_url;
+      })
+    }
+    const heart = makeHeart();
+    appendElements(div, [createImg(img), createText('h2', name), createText('h4', artistas), heart])
+    container.append(div)
+  })
+}
+
+function createImg(src) {
+  const img = document.createElement('img');
+  img.src = src;
+  return img
+}
+
+function createText(element, innerText) {
+  const containerElement = document.createElement(element)
+  containerElement.innerText = innerText;
+  return containerElement;
+}
+
+function createDiv(id, className) {
+  const div = document.createElement('div')
+  div.className = className;
+  div.id = id;
+  return div
+}
+
+function makeHeart(id) {
+  const getFav = localStorage.getItem('favoritos');
+  const arrayOfFavs = JSON.parse(getFav);
+  const heart = createDiv('heart', 'far fa-heart');
+  if (arrayOfFavs) {
+    if( arrayOfFavs.includes(id) ) {
+      heart.className = 'fas fa-heart'
+    }
+  }
+  heart.addEventListener('click', () => {
+    if(heart.classList.contains('fas')) {
+      heart.className = 'far fa-heart'
+    } else {
+      heart.className = 'fas fa-heart'
+    }
+    addLocalStorage(id)
+  })
+  return heart
+}
+
+function appendElements(parent, elements) {
+  elements.forEach((element) => parent.appendChild(element))
 }
 
 const getSearch = async (query, limite, slice = 0) => {
@@ -84,27 +123,25 @@ const getSearch = async (query, limite, slice = 0) => {
     .catch(() => canSearch = false);
   if(canSearch) {
     array = array.slice(slice)
-    slice ? makeNewItens(array) : makeNewItens(array, true)
+    slice ? makeNewSearch(array) : makeNewSearch(array, true)
   }
 }
 
-const getTrending = async () => {
+const getTop50 = async () => {
   const spotTrybe = await createAsyncSpotTrybe();
-  let array = await spotTrybe.getPlaylist('2G73gq2YWPWwToeAwNaD2k')
-    .then(({ tracks }) => tracks)
-    .then(({ items }) => items)
-    .then((arr) => arr.map((item) => item.track))
-  makeNewItens(array, true)
+  const array = await spotTrybe.getPlaylist('37i9dQZEVXbMDoHDwVN2tF')
+    .then(({tracks}) => tracks)
+  makeTop50(array)
 }
   
 function getSearchInput() {
   const search = document.getElementById('search');
   search.addEventListener('keyup', () => {
     const { value } = search
-    if (value !== '') {
-      getSearch(value, 20)
+    if (!value) {
+      getTop50()
     } else {
-      getTrending()
+      getSearch(value, 20)
     }
   })
 }
@@ -122,3 +159,7 @@ function verifyScroll() {
   })
 }
 verifyScroll();
+
+window.onload = () => {
+  getTop50()
+}
