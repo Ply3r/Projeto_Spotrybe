@@ -1,15 +1,16 @@
 import { createAudioElement, playerProgressHandler, togglePlay } from './player.js'
-import createAsyncSpotTrybe from "./spotify.js";
 
 /*
 createAudioElement(preview_url);
 //audio.src = preview_url;
 */
 
+import createAsyncSpotTrybe from "./spotify.js";
+import {addLocalStorage, getCurrentFav} from './localStorageHandler.js'
 const MainTitle = document.querySelector('#main-title');
 let position = '';
+let lastCategory = null; 
 let lastPlaylist = null;
-let lastCategory = null;
 
 const before = document.querySelector('#before');
 const after = document.querySelector('#after');
@@ -36,9 +37,8 @@ async function getTracks(id, titleName) {
     if(preview_url) {
       div.addEventListener('click', () => {
         imagemPlayer.src = album.images[0].url;
-        createAudioElement(preview_url);
-        //audio.src = preview_url;
-      });
+        createAudioElement(preview_url)
+      })
     }
     const heart = document.createElement('div');
     heart.className = 'far fa-heart'
@@ -79,43 +79,41 @@ const getPlaylist = async (id, titleName) => {
       lastPlaylist = [id, name];
       position = 'playlist'
       cleanContentAndGetTracks(id, name);
-    });
-    appendToElement(div, [createImage(images[0].url), createName(name)]);
-    container.append(div);
+    })
+    appendToElement(div,[createImage(images[0].url),createName(name)]);
+    container.append(div)
   });
-};
+}
 
 const getCategories = async () => {
   const spotTrybe = await createAsyncSpotTrybe();
-  let {
-    categories: { items },
-  } = await spotTrybe.getListOfBrowseCategories(20);
-  createAndAppendCategories(items);
-};
+  let { categories:{items} } = await spotTrybe.getListOfBrowseCategories(20)
+  createAndAppendCategories(items)
+}
 
 function createAndAppendCategories(array) {
-  const container = document.querySelector('.grid-container');
+  const container = document.querySelector('.grid-container')
   array.forEach(({ name, id, icons }) => {
     const { url } = icons[0];
-    const div = createDiv(id, 'grid-item');
+    const div = createDiv(id,'grid-item');
     div.addEventListener('click', () => {
       lastCategory = [id, name];
       position = 'category'
       cleanContentAndGetPlaylist(id, name);
-    });
-    appendToElement(div, [createImage(url), createName(name)]);
-    container.append(div);
-  });
+    })
+    appendToElement(div,[createImage(url),createName(name)]);
+    container.append(div)
+  })
 }
 
 function createDiv(id, classe) {
   const div = document.createElement('div');
   div.id = id;
   div.className = classe;
-  return div;
+  return div
 }
 
-function appendToElement(div, listOfElements) {
+function appendToElement(div,listOfElements) {
   listOfElements.forEach((element) => div.append(element));
 }
 
@@ -126,13 +124,13 @@ function createImage(url) {
 }
 
 function createName(name) {
-  const h2 = document.createElement('h2');
+  const h2 = document.createElement('h2')
   h2.innerText = name;
   return h2;
 }
 
 function createGeneric(textContent, elementToCreate) {
-  const generic = document.createElement(elementToCreate);
+  const generic = document.createElement(elementToCreate)
   generic.innerText = textContent;
   return generic;
 }
@@ -178,9 +176,5 @@ after.addEventListener('click',() => {
 })
 
 window.onload = () => {
-  getCategories();
-};
-
-// New Player - Rafael
-
-
+  getCategories()
+}
