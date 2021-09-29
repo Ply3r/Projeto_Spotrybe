@@ -1,12 +1,8 @@
 import createAsyncSpotTrybe from "./spotify.js";
+const MainTitle = document.querySelector('#main-title');
 
-const getCategories = async () => {
-  const spotTrybe = await createAsyncSpotTrybe();
-  let { categories:{items} } = await spotTrybe.getListOfBrowseCategories(20)
-  createAndAppendCategories(items)
-}
-
-async function getTracks(id) {
+async function getTracks(id, titleName) {
+  MainTitle.textContent = titleName;
   const imagemPlayer = document.querySelector('#current-image-player')
   const audio = document.querySelector('#audio');
   const spotTrybe = await createAsyncSpotTrybe();
@@ -15,10 +11,10 @@ async function getTracks(id) {
   console.log(tracks);
   tracks.forEach( async ({id, preview_url, artists, album}) => {
     const artistaPrincipal = artists
-      .map((artista) => artista.name)
-      .join(', ')
+    .map((artista) => artista.name)
+    .join(', ')
     const div = createDiv(id,'grid-item');
-
+    
     const newName = await spotTrybe.getTrackById(id);
     appendToElement(div,[createImage(album.images[0].url),createName(newName.name),createGeneric(artistaPrincipal,'h4')]);
     
@@ -32,20 +28,30 @@ async function getTracks(id) {
   });
 }
 
-const getPlaylist = async (id) => {
+const getPlaylist = async (id, titleName) => {
+
   const spotTrybe = await createAsyncSpotTrybe();
   const container = document.querySelector('.grid-container')
   let { playlists: { items } } = await spotTrybe.getCategorysPlaylists(id, 20);
+
+  MainTitle.textContent = titleName;
+
   console.log(items)
   items.forEach(({name, id, images}) => {
     const div = createDiv(id,'grid-item');
     div.addEventListener('click', () => {
-      cleanContentAndGetTracks(id);
+      cleanContentAndGetTracks(id, name);
     })
     appendToElement(div,[createImage(images[0].url),createName(name)]);
     container.append(div)
   });
-} 
+}
+
+const getCategories = async () => {
+  const spotTrybe = await createAsyncSpotTrybe();
+  let { categories:{items} } = await spotTrybe.getListOfBrowseCategories(20)
+  createAndAppendCategories(items)
+}
 
 function createAndAppendCategories(array) {
   const container = document.querySelector('.grid-container')
@@ -53,7 +59,7 @@ function createAndAppendCategories(array) {
     const { url } = icons[0];
     const div = createDiv(id,'grid-item');
     div.addEventListener('click', () => {
-      cleanContentAndGetPlaylist(id);
+      cleanContentAndGetPlaylist(id, name);
     })
     appendToElement(div,[createImage(url),createName(name)]);
     container.append(div)
@@ -89,17 +95,17 @@ function createGeneric(textContent, elementToCreate) {
   return generic;
 }
 
-function cleanContentAndGetPlaylist(id) {
+function cleanContentAndGetPlaylist(id, name) {
   const container = document.querySelector('.grid-container');
   container.innerHTML = '';
   console.log(id);
-  getPlaylist(id);
+  getPlaylist(id, name);
 }
 
-function cleanContentAndGetTracks(id) {
+function cleanContentAndGetTracks(id, name) {
   const container = document.querySelector('.grid-container');
   container.innerHTML = '';
-  getTracks(id);
+  getTracks(id, name);
 }
 
 window.onload = () => {
