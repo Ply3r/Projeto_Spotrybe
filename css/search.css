@@ -42,23 +42,25 @@ main {
   gap: 15px;
   margin-bottom: 10vh;
   place-items: center;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   color: white;
 }
 
 .grid-item {
+  height: 425px;
+  width: 350px;
   cursor: pointer;
   transition: .5s ease;
   text-align: center;
-  height: 400px;
-}
-
-.grid-item:hover {
-  background-color: rgba(255, 255, 255, 0.3);
+  font-size: 0.8rem;
 }
 
 .grid-item img {
   width: 100%;
+}
+
+.grid-item:hover {
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .grid-item .fa-heart {
