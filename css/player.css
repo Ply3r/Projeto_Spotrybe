@@ -33,15 +33,23 @@ player {
   background-color: #6f35cb;
 }
 
+@media screen and (max-width: 600px) {
+  player {
+    margin-left: 0;
+    justify-content: center;
+  }
+}
+
 @media screen and (max-width: 480px) {
   player {
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     height: 100px;
   }
 
   .player-controls {
-    margin-left: 23vw;
+    width: 100vw;
+    margin-left: 0;
   }
 }
