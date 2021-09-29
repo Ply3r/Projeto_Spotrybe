@@ -113,6 +113,10 @@ main {
     width: 100vw;
   }
 
+  .hero-search {
+    height: 20vh;
+  }
+
   .grid-container {
     grid-template-columns: 1fr;
   }
