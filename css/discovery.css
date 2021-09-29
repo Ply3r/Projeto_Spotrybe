@@ -9,28 +9,13 @@ main {
   place-items: center;
   color: white;
   font-size: 3rem;
-  background-image: linear-gradient(aqua, transparent);
+  background-image: linear-gradient(purple, transparent);
 }
 
-.busca-container {
-  height: 5%;
-  width: 100%;
-  display: grid;
-  place-items: center;
-}
-
-.busca-container input {
-  border: none;
-  height: 50%;
-  width: 50%;
-  font-size: 1.5em;
-  border-radius: 30px;
-  padding: 0 20px;
-}
-
-.busca-item {
-  right: 22%;
-  position: absolute;
+#main-title {
+  text-indent: 15px;
+  font-size: 1.8em;
+  color: white;
 }
 
 .grid-container {
@@ -50,23 +35,14 @@ main {
   cursor: pointer;
   transition: .5s ease;
   text-align: center;
-  height: 400px;
-}
-
-.grid-item:hover {
-  background-color: rgba(255, 255, 255, 0.3);
 }
 
 .grid-item img {
   width: 100%;
 }
 
-.grid-item .fa-heart {
-  display: flex;
-  place-items: center;
-  align-content: flex-end;
-  margin-left: 10px;
-  height: 10%;
+.grid-item:hover {
+  background-color: rgba(255, 255, 255, 0.3);
 }
 
 .grid-container::-webkit-scrollbar {
