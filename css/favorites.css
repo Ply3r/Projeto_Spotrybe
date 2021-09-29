@@ -9,7 +9,7 @@ main {
   place-items: center;
   color: white;
   font-size: 3rem;
-  background-image: linear-gradient(red, transparent);
+  background-image: linear-gradient(rgba(255, 0, 0, 0.7), transparent);
 }
 
 .grid-container {
@@ -80,6 +80,17 @@ main {
   background: #555;
 }
 
+@media screen and (max-width: 1200px) and (min-width: 600px) {
+  .grid-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .grid-item {
+    height: 40vh;
+    width: 25vw;
+  }
+}
+
 @media screen and (max-width: 600px) {
   main {
     width: 100vw;
@@ -90,7 +101,7 @@ main {
   }
 
   .grid-item {
-    height: 52vh;
+    height: 48vh;
     width: 70vw;
   }
 

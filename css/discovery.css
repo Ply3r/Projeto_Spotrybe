@@ -29,7 +29,7 @@
   place-items: center;
   color: white;
   font-size: 3rem;
-  background-image: linear-gradient(purple, transparent);
+  background-image: linear-gradient(rgba(128, 0, 128, 0.7), transparent);
 }
 
 #main-title {
@@ -102,6 +102,17 @@
   background: #555;
 }
 
+@media screen and (max-width: 1200px) and (min-width: 600px) {
+  .grid-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .grid-item {
+    height: 30vh;
+    width: 25vw;
+  }
+}
+
 @media screen and (max-width: 600px) {
   main {
     width: 100vw;
@@ -112,7 +123,7 @@
   }
 
   .grid-item {
-    height: 52vh;
+    height: 42vh;
     width: 70vw;
   }
 

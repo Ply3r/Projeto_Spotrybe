@@ -9,7 +9,7 @@ main {
   place-items: center;
   color: white;
   font-size: 3rem;
-  background-image: linear-gradient(aqua, transparent);
+  background-image: linear-gradient(rgba(0, 255, 255, 0.7), #272624);
 }
 
 .busca-container {
@@ -99,13 +99,12 @@ main {
 
 @media screen and (max-width: 1200px) and (min-width: 600px) {
   .grid-container {
-    display: grid;
     grid-template-columns: repeat(3, 1fr);
   }
 
   .grid-item {
-    height: 38vh;
-    width: 22vw;
+    height: 40vh;
+    width: 25vw;
   }
 }
 
@@ -119,7 +118,7 @@ main {
   }
 
   .grid-item {
-    height: 52vh;
+    height: 48vh;
     width: 70vw;
   }
 
