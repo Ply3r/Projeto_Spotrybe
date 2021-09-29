@@ -156,4 +156,28 @@ main .profile-card .profile-spotify:hover {
     grid-template-columns: 1fr;
     place-items: center;
   }
+
+  .sign-out-text {
+    display: none;
+  }
+
+  .fa-sign-out-alt {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 801px) {
+  
+  
+}
+
+@media screen and (max-width: 800px) {
+  .sign-out-text {
+    display: none;
+  }
+
+  .fa-sign-out-alt {
+    display: block;
+  }
+  
 }
