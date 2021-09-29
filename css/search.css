@@ -42,18 +42,15 @@ main {
   gap: 15px;
   margin-bottom: 10vh;
   place-items: center;
-  grid-template-columns: repeat(5, 1fr)
+  grid-template-columns: repeat(5, 1fr);
+  color: white;
 }
 
 .grid-item {
   cursor: pointer;
-  background-color: rgba(0, 0, 0, 0.2);
-  display: flex;
-  flex-direction: column;
-  color: white;
-  width: 200px;
-  height: 300px;
   transition: .5s ease;
+  text-align: center;
+  height: 400px;
 }
 
 .grid-item:hover {
@@ -65,11 +62,11 @@ main {
 }
 
 .grid-item .fa-heart {
-  height: 100%;
-  width: 90%;
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
+  place-items: center;
+  align-content: flex-end;
+  margin-left: 10px;
+  height: 10%;
 }
 
 .grid-container::-webkit-scrollbar {
