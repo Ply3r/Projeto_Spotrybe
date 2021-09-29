@@ -15,11 +15,21 @@
   }
   
   .progress {
-    width: 300px;
+    width: 950px;
     height: 5px;
   }
   
   .progress-bar {
     background-color: #6f35cb;
-    transition-duration: 1.5s;
+    transition-duration: 1s;
+    transition: 1.5s ease;
+  }
+
+  .progress-ball {
+    position: absolute;
+    right: 67.8%;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: white;
   }

@@ -4,7 +4,7 @@ main {
 
 .hero-search {
   width: 100%;
-  height: 25vh;
+  height: 30vh;
   display: grid;
   place-items: center;
   color: white;
@@ -14,24 +14,31 @@ main {
 
 .grid-container {
   width: 100%;
-  height: 65vh;
+  height: 70vh;
   overflow: auto;
   padding: 25px;
   display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: 15px;
   margin-bottom: 10vh;
   place-items: center;
-  grid-template-columns: repeat(4, 1fr);
   color: white;
 }
 
 .grid-item {
-  height: 425px;
-  width: 350px;
+  height: 48vh;
+  width: 18vw;
   cursor: pointer;
   transition: .5s ease;
   text-align: center;
-  font-size: 0.8rem;
+}
+
+.grid-item h2 {
+  font-size: 1.2em;
+}
+
+.grid-item h4 {
+  font-size: 1em;
 }
 
 .grid-item img {
@@ -71,4 +78,27 @@ main {
 /* Handle on hover */
 .grid-container::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+@media screen and (max-width: 600px) {
+  main {
+    width: 100vw;
+  }
+
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
+
+  .grid-item {
+    height: 52vh;
+    width: 70vw;
+  }
+
+  .busca-item {
+    right: 12%;
+  }
+
+  .busca-container input {
+    width: 80%;
+  }
 }

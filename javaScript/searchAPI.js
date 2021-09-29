@@ -1,4 +1,5 @@
 import createAsyncSpotTrybe from './spotify.js'
+import { createAudioElement } from './player.js';
 import {addLocalStorage, getCurrentFav} from './localStorageHandler.js'
 let limit = 20;
 console.log(JSON.parse(localStorage.currentUser));
@@ -6,7 +7,6 @@ console.log(JSON.parse(localStorage.currentUser));
 function makeNewSearch(array, clear) {
   const container = document.querySelector('.grid-container')
   const imagemPlayer = document.querySelector('#current-image-player')
-  const audio = document.querySelector('#audio');
   if (clear) {
     container.innerHTML = '';
     limit = 20
@@ -21,7 +21,8 @@ function makeNewSearch(array, clear) {
     if(preview_url) {
       div.addEventListener('click', () => {
         imagemPlayer.src = img;
-        audio.src = preview_url;
+        imagemPlayer.style.visibility = 'visible'
+        createAudioElement(preview_url)
       })
     }
     const heart = makeHeart(id);
@@ -90,7 +91,6 @@ function makeTop50(array) {
   const container = document.querySelector('.grid-container')
   container.innerHTML = '';
   const imagemPlayer = document.querySelector('#current-image-player')
-  const audio = document.querySelector('#audio');
   array.forEach(({ id, artists, preview_url, album: { name, images } }) => {
     const artistas = artists
       .map((artista) => artista.name)
@@ -100,7 +100,8 @@ function makeTop50(array) {
     if(preview_url) {
       div.addEventListener('click', () => {
         imagemPlayer.src = img;
-        audio.src = preview_url;
+        imagemPlayer.style.visibility = 'visible'
+        createAudioElement(preview_url);
       })
     }
     const heart = makeHeart(id);
