@@ -124,6 +124,9 @@ aside {
   width: 70%;
   height: 90%;
   box-shadow: 0 0 1em black;
+
+
+  visibility: hidden;
 }
 
 player {
