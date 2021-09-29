@@ -108,7 +108,7 @@
   }
 
   .grid-item {
-    height: 30vh;
+    height: 40vh;
     width: 25vw;
   }
 }
@@ -122,8 +122,12 @@
     grid-template-columns: 1fr;
   }
 
+  .hero-search {
+    height: 20vh;
+  }
+
   .grid-item {
-    height: 42vh;
+    height: 52vh;
     width: 70vw;
   }
 
