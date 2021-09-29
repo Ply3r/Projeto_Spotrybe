@@ -83,7 +83,7 @@
 }
 
 .fa-heart::before {
-  text-shadow: 0 0 1em black;
+  text-shadow: 0 0 10px black;
   position: absolute;
   top: 5%;
   right: 10%;
