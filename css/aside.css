@@ -213,6 +213,7 @@ audio::-webkit-media-controls-panel {
   .menu-container {
     flex-direction: row;
     padding: 0;
+    margin-right: 4vw;
   }
 
   .menu-container a {
