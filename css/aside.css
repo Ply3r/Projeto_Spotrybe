@@ -31,20 +31,26 @@ aside {
   flex-grow: 2;
   flex-direction: column;
   justify-content: space-between;
+
 }
 
 .logo-container {
+  display: flex;
   height: 10%;
   width: 100%;
   justify-content: center;
   align-items: center;
   display: flex;
   color: white;
-  align-items: center;
-  font-size: 1.3em;
   margin-top: 20px;
+  align-items: center !important;
+  
 }
 
+.logo-container-title {
+  font-size: 1.5em !important;
+  margin-bottom: 0;
+}
 .user-container {
   font-size: 1.5em;
   display: flex;
@@ -75,7 +81,8 @@ aside {
   height: 0;
   padding: 0;
   padding-bottom: 300px;
-  
+  font-size: 15px;
+  line-height: normal;
 }
 
 .menu-container a {
@@ -124,6 +131,9 @@ aside {
   width: 70%;
   height: 90%;
   box-shadow: 0 0 1em black;
+
+
+  visibility: hidden;
 }
 
 player {

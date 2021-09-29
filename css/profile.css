@@ -15,8 +15,16 @@
 
 */
 
-#main { 
-  margin-top: 20vh;
+main {
+  width: 85vw;
+}
+
+aside {
+  justify-content: flex-start !important;
+}
+
+.logo-container {
+  margin-bottom: 6vh;
 }
 
 main .profile {

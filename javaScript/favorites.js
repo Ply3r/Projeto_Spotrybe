@@ -56,7 +56,7 @@ function makeNewItens(array, clear) {
   })
 }
 
-const getItemFavoritos = async (array) => {
+const getItemFavoritos = async () => {
   document.querySelector('.grid-container').innerHTML = '';
   const favs = getCurrentFav();
   const spotTrybe = await createAsyncSpotTrybe();
