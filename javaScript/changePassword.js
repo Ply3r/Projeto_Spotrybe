@@ -7,7 +7,7 @@ const clearMessages = () => {
   });
 };
 
-const CreateErrorElement = (msg, elToAppend) => {
+const createErrorElement = (msg, elToAppend) => {
   // Remove previous error message
   clearMessages();
 

@@ -7,7 +7,7 @@ const clearMessages = () => {
   });
 };
 
-const CreateErrorElement = (msg, elToAppend) => {
+const createErrorElement = (msg, elToAppend) => {
   // Remove previous error message
   clearMessages();
 
@@ -52,7 +52,7 @@ const signIn = (e) => {
     if (password === user.password) {
         localStorage.setItem('currentUser', JSON.stringify(user));
         createSuccessElement('Logged in successfully!', passwordContainer);
-        window.location.href = '../pages/search.html';
+        window.location.href = '../pages/discovery.html';
     } else {
         CreateErrorElement('Password is not correct!', passwordContainer);
     }
