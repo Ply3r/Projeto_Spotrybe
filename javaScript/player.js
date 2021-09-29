@@ -12,10 +12,29 @@ const createAudioElement = (link) => {
   audio.id = 'playerMusic';
   audio.addEventListener('loadeddata', () => {
     addDuration(parseInt(audio.duration));
-  });
 
+    const progressDiv = document.querySelector('.progress');
+    progressDiv.removeEventListener('mouseover');
+    progressDiv.removeEventListener('mouseout');
+    progressDiv.addEventListener('mouseover', () => createProgressBall());
+    progressDiv.addEventListener('mouseout', () => removeProgressBall());
+  });
   document.body.appendChild(audio);
 };
+
+const createProgressBall = () => {
+  const ball = document.createElement('i');
+  const progressDiv = document.querySelector('.progress')
+  ball.className = 'fas fa-circle';
+  ball.style.color = 'white';
+
+  progressDiv.appendChild(ball);
+}
+
+const removeProgressBall = () => {
+  const ball = document.querySelector('.fa-circle');
+  ball.remove();
+}
 
 const getCurrentTime = (music) => parseInt(music.currentTime).toString().padStart(2, '0');
 
@@ -80,8 +99,6 @@ const togglePlay = () => {
       currentMusic.pause();
       handlePlayButton(false);
     }
-
-    // playerProgressHandler(currentMusic);
   }
 };
 
