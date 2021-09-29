@@ -17,6 +17,7 @@
 
 main {
   width: 85vw;
+  margin-top: 10vw;
 }
 
 aside {
@@ -58,7 +59,7 @@ main .info-profile .card-container-playlist{
   padding: 10px;
   align-self: flex-start;
   text-align: center;
-  width: 50%;
+  width: 60%;
   display: flex;
   flex-direction: column;
   color: white;
