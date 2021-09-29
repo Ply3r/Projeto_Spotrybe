@@ -90,7 +90,7 @@ aside {
 }
 
 .menu-container a:hover {
-  color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .menu-container a.active {
@@ -101,7 +101,7 @@ aside {
 .image-container-player {
   display: flex;
   bottom: 0%;
-  margin-bottom: 50px;
+  margin-bottom: 5px;
   justify-content: center;
   height: 20vw;
   width: 100%;
