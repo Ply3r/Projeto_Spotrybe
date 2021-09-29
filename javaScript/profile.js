@@ -7,11 +7,25 @@ async function getProfileDice(){
 
   const user = JSON.parse(localStorage.getItem('currentUser'));
 
-  let {display_name, images, followers} = await spotTrybe.getUserProfileInfo(user.spotifyId);  
+  let {
+    display_name, 
+    images, followers, 
+    external_urls, 
+  } = await spotTrybe.getUserProfileInfo(user.spotifyId);  
 
-  changeProfile(display_name, images[0], followers.total);
+  changeProfile(display_name, images[0], followers.total, external_urls.spotify);
 
 }
+
+function changeProfile(name, url, followers, spotifyLink) {
+
+  document.querySelector('.followers').innerText = followers
+  document.querySelector('.image-profile').src = url.url;
+  document.querySelector('.name-profile').innerText = name;
+  document.querySelector('.profile-spotify').href = spotifyLink;
+}
+
+
 
 async function userPlaylist() {
   const spotTrybe = await createAsyncSpotTrybe();
@@ -27,8 +41,6 @@ async function userPlaylist() {
 
 function createCardPlaylist({name, images}){
 
-  // console.log( images)
-
   const div = document.createElement('div');
   const img = document.createElement('img');
   const paragraph = document.createElement('p');
@@ -43,13 +55,6 @@ function createCardPlaylist({name, images}){
   document.querySelector('.cards-group').appendChild(div);
 }
 
-
-function changeProfile(name, url, followers) {
-
-  document.querySelector('.followers').innerText = followers
-  document.querySelector('.image-profile').src = url.url;
-  document.querySelector('.name-profile').innerText = name;
-}
 
 window.onload = () =>{
   getProfileDice();
