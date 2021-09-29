@@ -67,11 +67,14 @@ main .info-profile .card-container-playlist .cards-group {
 main .info-profile .card-container-playlist .cards-group div {
   width: 150px;
   height: 130px;
-  border: 1px solid black;
-  background: white;
+  color: white;
   margin: 10px;
 }
 
+main .info-profile .card-container-playlist .cards-group .img-card-playlist {
+  width: 100%;
+  height: 80%;
+}
 /*
   Card profile
 */
