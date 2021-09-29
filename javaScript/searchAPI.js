@@ -1,12 +1,12 @@
 import createAsyncSpotTrybe from './spotify.js'
+import { createAudioElement } from './player.js';
 import {addLocalStorage, getCurrentFav} from './localStorageHandler.js'
 let limit = 20;
 console.log(JSON.parse(localStorage.currentUser));
 
-function makeNewItens(array, clear) {
+function makeNewSearch(array, clear) {
   const container = document.querySelector('.grid-container')
   const imagemPlayer = document.querySelector('#current-image-player')
-  const audio = document.querySelector('#audio');
   if (clear) {
     container.innerHTML = '';
     limit = 20
@@ -21,47 +21,11 @@ function makeNewItens(array, clear) {
     if(preview_url) {
       div.addEventListener('click', () => {
         imagemPlayer.src = img;
-        audio.src = preview_url;
+        imagemPlayer.style.visibility = 'visible'
+        createAudioElement(preview_url)
       })
     }
-    const heart = makeHeart();
-    appendElements(div, [createImg(img), createText('h2', name), createText('h4', artistas), heart])
-    container.append(div)
-  })
-}
-
-const getSearch = async (query, limite, slice = 0) => {
-  if (slice > 50) return;
-  const spotTrybe = await createAsyncSpotTrybe();
-  let canSearch = true
-  let array = await spotTrybe.getNPossibleTracks(query, limite)
-    .then(({ tracks }) => tracks)
-    .then(({ items }) => items)
-    .catch(() => canSearch = false);
-  if(canSearch) {
-    array = array.slice(slice)
-    slice ? makeNewItens(array) : makeNewItens(array, true)
-  }
-}
-
-function makeTop50(array) {
-  const container = document.querySelector('.grid-container')
-  container.innerHTML = '';
-  const imagemPlayer = document.querySelector('#current-image-player')
-  const audio = document.querySelector('#audio');
-  array.forEach(({ id, artists, preview_url, album: { name, images } }) => {
-    const artistas = artists
-      .map((artista) => artista.name)
-      .join(', ')
-    const img = images[1].url
-    const div = createDiv(id, 'grid-item')
-    if(preview_url) {
-      div.addEventListener('click', () => {
-        imagemPlayer.src = img;
-        audio.src = preview_url;
-      })
-    }
-    const heart = makeHeart();
+    const heart = makeHeart(id);
     appendElements(div, [createImg(img), createText('h2', name), createText('h4', artistas), heart])
     container.append(div)
   })
@@ -107,6 +71,43 @@ function makeHeart(id) {
 
 function appendElements(parent, elements) {
   elements.forEach((element) => parent.appendChild(element))
+}
+
+const getSearch = async (query, limite, slice = 0) => {
+  if (slice > 50) return;
+  const spotTrybe = await createAsyncSpotTrybe();
+  let canSearch = true
+  let array = await spotTrybe.getNPossibleTracks(query, limite)
+    .then(({ tracks }) => tracks)
+    .then(({ items }) => items)
+    .catch(() => canSearch = false);
+  if(canSearch) {
+    array = array.slice(slice)
+    slice ? makeNewSearch(array) : makeNewSearch(array, true)
+  }
+}
+
+function makeTop50(array) {
+  const container = document.querySelector('.grid-container')
+  container.innerHTML = '';
+  const imagemPlayer = document.querySelector('#current-image-player')
+  array.forEach(({ id, artists, preview_url, album: { name, images } }) => {
+    const artistas = artists
+      .map((artista) => artista.name)
+      .join(', ')
+    const img = images[1].url
+    const div = createDiv(id, 'grid-item')
+    if(preview_url) {
+      div.addEventListener('click', () => {
+        imagemPlayer.src = img;
+        imagemPlayer.style.visibility = 'visible'
+        createAudioElement(preview_url);
+      })
+    }
+    const heart = makeHeart(id);
+    appendElements(div, [createImg(img), createText('h2', name), createText('h4', artistas), heart])
+    container.append(div)
+  })
 }
 
 const getTop50 = async () => {

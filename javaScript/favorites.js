@@ -1,11 +1,11 @@
 import {addLocalStorage, getCurrentFav} from './localStorageHandler.js'
+import { createAudioElement } from './player.js';
 import createAsyncSpotTrybe from './spotify.js';
 
 
 function makeNewItens(array, clear) {
   const container = document.querySelector('.grid-container')
   const imagemPlayer = document.querySelector('#current-image-player')
-  const audio = document.querySelector('#audio');
   if (clear) {
     container.innerHTML = '';
     limit = 20
@@ -29,7 +29,8 @@ function makeNewItens(array, clear) {
     if(preview_url) {
       div.addEventListener('click', () => {
         imagemPlayer.src = img;
-        audio.src = preview_url;
+        imagemPlayer.style.visibility = 'visible'
+        createAudioElement(preview_url)
       })
     }
     const heart = document.createElement('div');
@@ -56,7 +57,7 @@ function makeNewItens(array, clear) {
   })
 }
 
-const getItemFavoritos = async (array) => {
+const getItemFavoritos = async () => {
   document.querySelector('.grid-container').innerHTML = '';
   const favs = getCurrentFav();
   const spotTrybe = await createAsyncSpotTrybe();

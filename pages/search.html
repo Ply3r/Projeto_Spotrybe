@@ -5,7 +5,14 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Spotrybe | Search</title>
+  <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+      crossorigin="anonymous"
+  />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="../css/player.css">
   <link rel="stylesheet" href="../css/aside.css">
   <link rel="stylesheet" href="../css/search.css">
 </head>
@@ -27,7 +34,7 @@
   </aside>
   <main>
     <div class="hero-search">
-      <h1>Search</h1>
+      <h1 class="display-1 fw-bolder">Search</h1>
     </div>
     <div class="busca-container">
       <input type="text" id="search" placeholder="Buscar musicas..." minlength="2" maxlength="50">
@@ -37,8 +44,21 @@
     </div>
   </main>
   <player>
-    <audio src="" controls id="audio"></audio>
+    <div class="player-controls d-flex justify-content-between align-items-center">
+      <span class="prev-btn"><i class="fas fa-step-backward"></i></span>
+      <span class="play-btn"><i class="fas fa-play-circle"></i></span>
+      <span class="d-none pause-btn"><i class="fas fa-pause-circle"></i></span>
+      <span class="next-btn"><i class="fas fa-step-forward"></i></span>
+    </div>
+    <div class="player-progress-bar mx-4 d-flex align-items-center">
+      <span class="player-current-time mx-2 text-white">00:00</span>
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="30"><div class="progress-ball"></div></div>
+      </div>
+      <span class="player-max-time mx-2 text-white">00:00</span>
+    </div>
   </player>
+  <script src="../javaScript/player.js"></script>
   <script src="../javaScript/searchAPI.js" type="module"></script>
 </body>
 </html>
