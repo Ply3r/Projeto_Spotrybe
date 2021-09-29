@@ -112,9 +112,20 @@
   background: #555;
 }
 
-@media screen and (max-width: 1200px) and (min-width: 600px) {
+@media screen and (max-width: 1200px) and (min-width: 940px) {
   .grid-container {
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  .grid-item {
+    height: 45vh;
+    width: 25vw;
+  }
+}
+
+@media screen and (max-width: 940px) and (min-width: 600px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .grid-item {
