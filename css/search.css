@@ -5,8 +5,10 @@ main {
 .hero-search {
   width: 100%;
   height: 30vh;
-  display: grid;
-  place-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 10px;
   color: white;
   font-size: 3rem;
   background-image: linear-gradient(rgba(0, 255, 255, 0.7), #272624);
@@ -125,7 +127,7 @@ main {
   }
 
   .hero-search {
-    height: 25vh;
+    height: 20vh;
   }
 
   .grid-container {
