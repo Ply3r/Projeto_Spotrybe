@@ -69,6 +69,7 @@ main .info-profile .card-container-playlist .cards-group div {
   height: 130px;
   border: 1px solid black;
   background: white;
+  color: black;
   margin: 10px;
 }
 

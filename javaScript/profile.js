@@ -13,6 +13,18 @@ async function getProfileDice(){
 
 }
 
+async function userPlaylist() {
+  const spotTrybe = await createAsyncSpotTrybe();
+
+  const user = JSON.parse(localStorage.getItem('currentUser'));
+  
+  const playlists = await spotTrybe.getUserPlaylists(user.spotifyId, 9);
+
+  console.log(playlists);
+
+}
+
+
 function changeProfile(name, url, followers) {
 
   document.querySelector('.followers').innerText = followers
@@ -20,4 +32,7 @@ function changeProfile(name, url, followers) {
   document.querySelector('.name-profile').innerText = name;
 }
 
-window.onload = () => getProfileDice();
+window.onload = () =>{
+  getProfileDice();
+  userPlaylist();
+};
