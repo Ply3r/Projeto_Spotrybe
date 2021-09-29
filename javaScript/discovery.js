@@ -6,7 +6,31 @@ const getCategories = async () => {
   createAndAppendCategories(items)
 }
 
-const 
+async function getTracks(id) {
+  const imagemPlayer = document.querySelector('#current-image-player')
+  const audio = document.querySelector('#audio');
+  const spotTrybe = await createAsyncSpotTrybe();
+  const container = document.querySelector('.grid-container')
+  let { tracks} = await spotTrybe.getPlaylist(id);
+  console.log(tracks);
+  tracks.forEach( async ({id, preview_url, artists, album}) => {
+    const artistaPrincipal = artists
+      .map((artista) => artista.name)
+      .join(', ')
+    const div = createDiv(id,'grid-item');
+
+    const newName = await spotTrybe.getTrackById(id);
+    appendToElement(div,[createImage(album.images[0].url),createName(newName.name),createGeneric(artistaPrincipal,'h4')]);
+    
+    if(preview_url) {
+      div.addEventListener('click', () => {
+        imagemPlayer.src = album.images[0].url;
+        audio.src = preview_url;
+      })
+    }
+    container.append(div)
+  });
+}
 
 const getPlaylist = async (id) => {
   const spotTrybe = await createAsyncSpotTrybe();
@@ -16,7 +40,7 @@ const getPlaylist = async (id) => {
   items.forEach(({name, id, images}) => {
     const div = createDiv(id,'grid-item');
     div.addEventListener('click', () => {
-      cleanContentAndGetPlaylist(id);
+      cleanContentAndGetTracks(id);
     })
     appendToElement(div,[createImage(images[0].url),createName(name)]);
     container.append(div)
