@@ -3,6 +3,7 @@ import createAsyncSpotTrybe from "./spotify.js";
 const MainTitle = document.querySelector('#main-title');
 let position = '';
 let lastPlaylist = null;
+let lastCategory = null;
 
 const before = document.querySelector('#before');
 const after = document.querySelector('#after');
