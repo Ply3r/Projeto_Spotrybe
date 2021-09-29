@@ -33,3 +33,9 @@
     border-radius: 50%;
     background-color: white;
   }
+
+@media screen and (max-width: 600px) {
+  .progress, .player-current-time, .player-max-time, div.player-progress-bar {
+    display: none !important;
+  }
+}
