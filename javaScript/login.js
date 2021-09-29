@@ -50,14 +50,14 @@ const signIn = (e) => {
 
   if (user) {
     if (password === user.password) {
-        localStorage.setItem('currentUser', JSON.stringify(user));
-        createSuccessElement('Logged in successfully!', passwordContainer);
-        window.location.href = '../pages/discovery.html';
+      localStorage.setItem('currentUser', JSON.stringify(user));
+      createSuccessElement('Logged in successfully!', passwordContainer);
+      window.location.href = '../pages/discovery.html';
     } else {
-        CreateErrorElement('Password is not correct!', passwordContainer);
+      createErrorElement('Password is not correct!', passwordContainer);
     }
   } else {
-    CreateErrorElement('User not found!', passwordContainer);
+    createErrorElement('User not found!', passwordContainer);
   }
 };
 

@@ -52,7 +52,7 @@ const changePassword = (e) => {
     localStorage.setItem(username, JSON.stringify({ ...user, password }));
     createSuccessElement('Password is changed!', passwordContainer);
   } else {
-    CreateErrorElement('There is no user with this username!', passwordContainer);
+    createErrorElement('There is no user with this username!', passwordContainer);
   }
 };
 
