@@ -71,7 +71,7 @@ const signUp = (e) => {
   const spotifyIdContainer = document.getElementsByClassName('spotify-id-container')[0];
 
   if (user) {
-    CreateErrorElement('User is already registered!', spotifyIdContainer);
+    createErrorElement('User is already registered!', spotifyIdContainer);
   } else {
     // Create Account
     createNewAccount(username, password, spotifyId);
