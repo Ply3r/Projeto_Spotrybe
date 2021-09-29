@@ -38,6 +38,8 @@ async function getTracks(id, titleName) {
       div.addEventListener('click', () => {
         imagemPlayer.src = album.images[0].url;
         createAudioElement(preview_url)
+        
+        imagemPlayer.style.visibility = 'visible'
       })
     }
     const heart = document.createElement('div');

@@ -31,6 +31,8 @@ function makeNewItens(array, clear) {
       div.addEventListener('click', () => {
         imagemPlayer.src = img;
         audio.src = preview_url;
+
+        imagemPlayer.style.visibility = 'visible'
       })
     }
     const heart = document.createElement('div');
