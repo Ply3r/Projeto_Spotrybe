@@ -27,6 +27,7 @@ player {
 }
 
 .progress {
+  overflow: visible;
   width: 30vw;
   flex-basis: 70%;
   max-width: 300px;
@@ -35,6 +36,12 @@ player {
 
 .progress-bar {
   background-color: #6f35cb;
+}
+
+.progress-ball {
+  color: white;
+  line-height: 5px;
+  margin-right: 3px;
 }
 
 @media screen and (max-width: 600px) {

@@ -8,33 +8,39 @@ const createAudioElement = (link) => {
   const prevAudio = document.getElementById('playerMusic');
   if (prevAudio) prevAudio.remove();
 
+  const progressDiv = document.querySelector('.progress');
+  progressDiv.removeEventListener('mouseover', createProgressBall);
+  progressDiv.removeEventListener('mouseout', removeProgressBall);
+
+  const currentTimeSpan = document.querySelector('.player-current-time');
+  currentTimeSpan.innerText = '00:00';
+  handleProgressBar(0);
+  handlePlayButton(false)
+
   const audio = new Audio(link);
   audio.id = 'playerMusic';
   audio.addEventListener('loadeddata', () => {
     addDuration(parseInt(audio.duration));
 
-    const progressDiv = document.querySelector('.progress');
-    progressDiv.removeEventListener('mouseover');
-    progressDiv.removeEventListener('mouseout');
-    progressDiv.addEventListener('mouseover', () => createProgressBall());
-    progressDiv.addEventListener('mouseout', () => removeProgressBall());
+    progressDiv.addEventListener('mouseover', createProgressBall);
+    progressDiv.addEventListener('mouseout', removeProgressBall);
   });
+
   document.body.appendChild(audio);
 };
 
 const createProgressBall = () => {
   const ball = document.createElement('i');
-  const progressDiv = document.querySelector('.progress')
-  ball.className = 'fas fa-circle';
-  ball.style.color = 'white';
+  const progressDiv = document.querySelector('.progress');
+  ball.className = 'fas fa-circle progress-ball';
 
   progressDiv.appendChild(ball);
-}
+};
 
 const removeProgressBall = () => {
   const ball = document.querySelector('.fa-circle');
   ball.remove();
-}
+};
 
 const getCurrentTime = (music) => parseInt(music.currentTime).toString().padStart(2, '0');
 
