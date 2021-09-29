@@ -78,6 +78,16 @@
   height: 10%;
 }
 
+.grid-item {
+  position:relative;
+}
+
+.fa-heart::before {
+  position: absolute;
+  top: 5%;
+  right: 10%;
+}
+
 .grid-item:hover {
   background-color: rgba(255, 255, 255, 0.3);
 }
