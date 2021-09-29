@@ -1,26 +1,9 @@
 import createAsyncSpotTrybe from './spotify.js'
+import {addLocalStorage, getCurrentFav} from './localStorageHandler.js'
 let limit = 20;
-
-function addLocalStorage(id) {
-  if(localStorage.favoritos) {
-    const favoritos = localStorage.getItem('favoritos')
-    const favParse = JSON.parse(favoritos)
-    let json;
-    if (favParse.includes(id)) {
-      const arrFiltrado = favParse.filter((item) => item !== id)
-      json = JSON.stringify(arrFiltrado)
-    } else {
-      json = JSON.stringify([...favParse, id])
-    }
-    localStorage.setItem('favoritos', json)
-  } else {
-    const json = JSON.stringify([id])
-    localStorage.setItem('favoritos', json)
-  }
-}
+console.log(JSON.parse(localStorage.currentUser));
 
 function makeNewItens(array, clear) {
-  console.log(array)
   const container = document.querySelector('.grid-container')
   const imagemPlayer = document.querySelector('#current-image-player')
   const audio = document.querySelector('#audio');
@@ -28,9 +11,8 @@ function makeNewItens(array, clear) {
     container.innerHTML = '';
     limit = 20
   }
+  const arrayOfFavs = getCurrentFav();
   array.forEach(({ name, id, artists, preview_url, album }) => {
-    const getFav = localStorage.getItem('favoritos')
-    const arrayOfFavs = JSON.parse(getFav);
     const artistaPrincipal = artists
       .map((artista) => artista.name)
       .join(', ')
@@ -108,6 +90,7 @@ function getSearchInput() {
     }
   })
 }
+
 getSearchInput();
 
 function verifyScroll() {
@@ -122,3 +105,4 @@ function verifyScroll() {
   })
 }
 verifyScroll();
+export { getCurrentFav, addLocalStorage };

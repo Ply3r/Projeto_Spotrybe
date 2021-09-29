@@ -1,14 +1,24 @@
 import createAsyncSpotTrybe from "./spotify.js";
+import {addLocalStorage, getCurrentFav} from './localStorageHandler.js'
 const MainTitle = document.querySelector('#main-title');
+let position = '';
+let lastCategory = null; 
+let lastPlaylist = null;
+
+const before = document.querySelector('#before');
+const after = document.querySelector('#after');
+
 
 async function getTracks(id, titleName) {
   MainTitle.textContent = titleName;
+  
+  const arrayOfFavs = getCurrentFav();
+  
   const imagemPlayer = document.querySelector('#current-image-player')
   const audio = document.querySelector('#audio');
   const spotTrybe = await createAsyncSpotTrybe();
   const container = document.querySelector('.grid-container')
   let { tracks} = await spotTrybe.getPlaylist(id);
-  console.log(tracks);
   tracks.forEach( async ({id, preview_url, artists, album}) => {
     const artistaPrincipal = artists
     .map((artista) => artista.name)
@@ -16,7 +26,6 @@ async function getTracks(id, titleName) {
     const div = createDiv(id,'grid-item');
     
     const newName = await spotTrybe.getTrackById(id);
-    appendToElement(div,[createImage(album.images[0].url),createName(newName.name),createGeneric(artistaPrincipal,'h4')]);
     
     if(preview_url) {
       div.addEventListener('click', () => {
@@ -24,22 +33,44 @@ async function getTracks(id, titleName) {
         audio.src = preview_url;
       })
     }
+    const heart = document.createElement('div');
+    heart.className = 'far fa-heart'
+    if (arrayOfFavs) {
+      if( arrayOfFavs.includes(id) ) {
+        heart.className = 'fas fa-heart'
+      }
+    }
+    heart.addEventListener('click', () => {
+      if(heart.classList.contains('fas')) {
+        heart.className = 'far fa-heart'
+      } else {
+        heart.className = 'fas fa-heart'
+      }
+      addLocalStorage(id)
+    })
+    appendToElement(div,
+      [createImage(album.images[0].url),
+      createName(newName.name),
+      createGeneric(artistaPrincipal,'h4'),
+      heart
+    ]);
     container.append(div)
   });
 }
 
 const getPlaylist = async (id, titleName) => {
-
+  
   const spotTrybe = await createAsyncSpotTrybe();
   const container = document.querySelector('.grid-container')
   let { playlists: { items } } = await spotTrybe.getCategorysPlaylists(id, 20);
-
+  
   MainTitle.textContent = titleName;
-
-  console.log(items)
+  
   items.forEach(({name, id, images}) => {
     const div = createDiv(id,'grid-item');
     div.addEventListener('click', () => {
+      lastPlaylist = [id, name];
+      position = 'playlist'
       cleanContentAndGetTracks(id, name);
     })
     appendToElement(div,[createImage(images[0].url),createName(name)]);
@@ -59,6 +90,8 @@ function createAndAppendCategories(array) {
     const { url } = icons[0];
     const div = createDiv(id,'grid-item');
     div.addEventListener('click', () => {
+      lastCategory = [id, name];
+      position = 'category'
       cleanContentAndGetPlaylist(id, name);
     })
     appendToElement(div,[createImage(url),createName(name)]);
@@ -95,10 +128,14 @@ function createGeneric(textContent, elementToCreate) {
   return generic;
 }
 
+function cleanContent() {
+  const container = document.querySelector('.grid-container');
+  container.innerHTML = '';
+}
+
 function cleanContentAndGetPlaylist(id, name) {
   const container = document.querySelector('.grid-container');
   container.innerHTML = '';
-  console.log(id);
   getPlaylist(id, name);
 }
 
@@ -107,6 +144,29 @@ function cleanContentAndGetTracks(id, name) {
   container.innerHTML = '';
   getTracks(id, name);
 }
+before.addEventListener('click',() => {
+  if (position === 'playlist' && lastCategory) {
+    position = 'category';
+    cleanContentAndGetPlaylist(lastCategory[0],lastCategory[1]);
+  } else if (position === 'category') {
+    position = 'discovery'
+    MainTitle.textContent = 'Categorias'
+    cleanContent();
+    getCategories();
+  }
+})
+
+after.addEventListener('click',() => {
+  if (position === 'discovery' && lastCategory) {
+    position = 'category';
+    console.log('entrou position category')
+    cleanContentAndGetPlaylist(lastCategory[0],lastCategory[1]);
+  } else if (position === 'category' && lastPlaylist) {
+    position = 'playlist';
+    console.log('entrou position playlist')
+    cleanContentAndGetTracks(lastPlaylist[0], lastPlaylist[1]);
+  }
+})
 
 window.onload = () => {
   getCategories()

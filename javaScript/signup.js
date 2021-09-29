@@ -49,6 +49,7 @@ const createNewAccount = async (username, password, spotifyId) => {
   const objeto = {
     [username]: {
       name,
+      username,
       password,
       spotifyId,
       playlists: [],
