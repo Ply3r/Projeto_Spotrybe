@@ -1,7 +1,11 @@
 player {
+  display: flex;
+  position: fixed;
+  bottom: 0;
   justify-content: start;
   background-color: #1e1f1d;
   margin-left: 15vw;
+  width: 100vw;
 }
 
 .player-controls {
