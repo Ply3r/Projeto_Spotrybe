@@ -41,7 +41,7 @@ aside {
   display: flex;
   color: white;
   align-items: center;
-  font-size: 1.5em;
+  font-size: 1.3em;
   margin-top: 20px;
 }
 
@@ -73,10 +73,14 @@ aside {
   width: 100%;
   margin: 0;
   height: 0;
+  padding: 0;
   padding-bottom: 300px;
+  
 }
 
 .menu-container a {
+  display: flex;
+  flex-direction: column;
   text-decoration: none;
   color: white;
   user-select: none;
@@ -87,7 +91,10 @@ aside {
   padding: 10px 15px;
   border-radius: 30px;
   margin-bottom: 10px;
-  transition: .5s ease;
+
+  justify-self: stretch;
+  width: 95%;
+
 }
 
 .menu-container a:hover {
@@ -95,16 +102,18 @@ aside {
 }
 
 .menu-container a.active {
-  color: black;
-  background-color: white;
+  color: white;
+  background-color: #272624;
+  border: none;
+  border-radius: 10px;
 }
 
 .image-container-player {
   display: flex;
   bottom: 0%;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
   justify-content: center;
-  height: 15vw;
+  height: 10vw;
   width: 15vw;
   flex-shrink: 0;
   flex-grow: 0;
