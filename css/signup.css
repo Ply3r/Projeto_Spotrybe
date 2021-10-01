@@ -1,8 +1,3 @@
-* {
-  color: white;
-  background-color: #272624;
-}
-
 header {
   background-color: #1e1f1d;
   align-self: stretch;
@@ -17,6 +12,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: white;
   background-color: #272624;
 }
 
@@ -31,6 +27,19 @@ form {
 
 form div {
     align-self: stretch;
+}
+
+.popover-header {
+  background-color: #6f35cb;
+}
+
+.popover-body {
+  background-color: #1e1f1d;
+  color: white;
+}
+
+.card-body a {
+  color: #0010e4;
 }
 
 .btn-purple {

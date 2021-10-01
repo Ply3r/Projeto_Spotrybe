@@ -5,13 +5,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Spotrybe | Sign Up</title>
-    <link rel="shortcut icon" href="../assets/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../assets/favicon.png" type="image/x-icon" />
     <!-- Bootstrap CSS -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
       crossorigin="anonymous"
+    />
+    <!-- Fontawesome CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+      integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
     />
     <!-- Page CSS -->
     <link rel="stylesheet" href="../css/signup.css" />
@@ -45,8 +53,56 @@
             required
           />
         </div>
+        <div class="row row-cols-2">
+          <div class="mb-4">
+            <label class="form-label" for="client-id"
+              >Client Id
+              <i
+                class="fas fa-question-circle"
+                data-bs-toggle="popover"
+                title="Client Id"
+                data-bs-content="Found in https://developer.spotify.com/dashboard/applications. You need to create a fake App to generate this data."
+              ></i
+            ></label>
+            <input
+              class="form-control"
+              type="text"
+              name="client-id"
+              id="client-id"
+              placeholder="3d91140696e5141c8850d9e5b18a5c28"
+              required
+            />
+          </div>
+          <div class="mb-4">
+            <label class="form-label" for="client-secret"
+              >Client Secret
+              <i
+                class="fas fa-question-circle"
+                data-bs-toggle="popover"
+                title="Client Secret"
+                data-bs-content="Found in https://developer.spotify.com/dashboard/applications. You need to create a fake App to generate this data."
+              ></i
+            ></label>
+            <input
+              class="form-control"
+              type="text"
+              name="client-secret"
+              id="client-secret"
+              placeholder="3080tife230b75d5a7"
+              required
+            />
+          </div>
+        </div>
         <div class="mb-4 spotify-id-container">
-            <label class="form-label" for="password">Spotify Id (Optional)</label>
+          <label class="form-label" for="spotify-id"
+            >Spotify Id (Optional)
+            <i
+              class="fas fa-question-circle"
+              data-bs-toggle="popover"
+              title="Spotify Id"
+              data-bs-content="Found in Open Spotify > Profile URL. Ex: https://open.spotify.com/user/𝘀𝗽𝗼𝘁𝗶𝗳𝘆𝗜𝗱"
+            ></i
+          ></label>
           <input
             class="form-control"
             type="text"
@@ -54,6 +110,13 @@
             id="spotify-id"
             placeholder="12147540058"
           />
+        </div>
+        <div class="card bg-secondary mb-3">
+          <div class="card-body">
+            <strong>Note:</strong> The information above will be strictly used within the local
+            enviroment and will not be shared with anyone but the official
+            <a href="https://developer.spotify.com/documentation/web-api/">Spotify's Web API</a>
+          </div>
         </div>
         <button class="mb-4 btn btn-purple signup-btn" type="submit">Sign Up</button>
         <p class="h3 text-center">Have an Account? <a class="h5" href="./login.html">Log in</a></p>

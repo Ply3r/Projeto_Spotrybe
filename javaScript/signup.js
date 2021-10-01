@@ -41,43 +41,48 @@ const isUser = (username) => {
   return localUser ? true : false;
 };
 
-const createNewAccount = async (username, password, spotifyId) => {
+const createNewAccount = async (username, password, clientId, clientSecret, spotifyId) => {
   const spotTrybe = await createAsyncSpotTrybe();
   let name = username;
   if (spotifyId) name = (await spotTrybe.getUserProfileInfo(spotifyId)).display_name;
 
-  const objeto = {
+  const object = {
     [username]: {
       name,
       username,
       password,
       spotifyId,
+      clientId,
+      clientSecret,
       playlists: [],
       favorites: [],
     },
   };
-  localStorage.setItem(username, JSON.stringify(objeto[username]));
-  localStorage.setItem('currentUser', JSON.stringify(objeto[username]));
+  localStorage.setItem(username, JSON.stringify(object[username]));
 };
 
 const signUp = (e) => {
   e.preventDefault();
 
-  const username = document.getElementById('username').value;
-  const password = document.getElementById('password').value;
-  const spotifyId = document.getElementById('spotify-id').value;
+  const fields = ['username', 'password', 'client-id', 'client-secret', 'spotify-id'];
+  const fieldsValues = fields.reduce((arr, cur) => [...arr, document.getElementById(cur).value], []);
 
-  const user = isUser(username);
-  const spotifyIdContainer = document.getElementsByClassName('spotify-id-container')[0];
+  const user = isUser(fieldsValues.username);
+  const spotifyIdContainer = document.querySelector('.spotify-id-container');
 
   if (user) {
     createErrorElement('User is already registered!', spotifyIdContainer);
   } else {
-    // Create Account
-    createNewAccount(username, password, spotifyId);
+    createNewAccount(...fieldsValues);
     createSuccessElement('User created successfully!', spotifyIdContainer);
   }
 };
 
 const signUpButton = document.querySelector('.signup-btn');
 signUpButton.addEventListener('click', signUp);
+
+// Initialize Bootstrap Popovers
+const popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+popoverTriggerList.map(function (popoverTriggerEl) {
+  return new bootstrap.Popover(popoverTriggerEl);
+});
