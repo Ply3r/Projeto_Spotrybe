@@ -223,6 +223,10 @@ main {
     grid-template-columns: repeat(3, 1fr);
   }
 
+  .busca-item {
+    margin-right: 20px;
+  }
+
   .grid-item {
     height: 45vh;
     width: 25vw;
@@ -234,12 +238,29 @@ main {
     width: 100vw;
   }
 
+  .busca-item {
+    top: 21.5%;
+    margin-right: 10px;
+  }
+
+  .busca-container {
+    flex-direction: column;
+  }
+
+  .busca-container input {
+    margin-bottom: 10px;
+  }
+
   .hero-search {
     height: 20vh;
   }
 
   .grid-container {
     grid-template-columns: 1fr;
+  }
+
+  .flex-item {
+    font-size: 0.5em;
   }
 
   .grid-item {
