@@ -61,20 +61,43 @@ const createNewAccount = async (username, password, clientId, clientSecret, spot
   localStorage.setItem(username, JSON.stringify(object[username]));
 };
 
+const validateForm = () => {
+  const form = document.querySelector('form');
+
+  if (!form.checkValidity()) {
+    form.classList.add('was-validated');
+    return false;
+  }
+  else {
+    form.classList.remove('was-validated');
+    return true;
+  }
+}
+
+const getFormData = () => {
+  if (validateForm()) {
+    const fields = ['username', 'password', 'client-id', 'client-secret', 'spotify-id'];
+    const fieldsValues = fields.reduce((arr, cur) => [...arr, document.getElementById(cur).value], []);
+    return fieldsValues;
+  }
+  return false;
+}
+
 const signUp = (e) => {
   e.preventDefault();
 
-  const fields = ['username', 'password', 'client-id', 'client-secret', 'spotify-id'];
-  const fieldsValues = fields.reduce((arr, cur) => [...arr, document.getElementById(cur).value], []);
+  const formData = getFormData();
+  const user = isUser(formData[0]);
 
-  const user = isUser(fieldsValues.username);
-  const spotifyIdContainer = document.querySelector('.spotify-id-container');
+  if (formData) {
+    const spotifyIdContainer = document.querySelector('.spotify-id-container');
 
-  if (user) {
-    createErrorElement('User is already registered!', spotifyIdContainer);
-  } else {
-    createNewAccount(...fieldsValues);
-    createSuccessElement('User created successfully!', spotifyIdContainer);
+    if (user) {
+      createErrorElement('User is already registered!', spotifyIdContainer);
+    } else {
+      createNewAccount(...formData);
+      createSuccessElement('User created successfully!', spotifyIdContainer);
+    }
   }
 };
 
