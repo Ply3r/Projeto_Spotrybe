@@ -1,7 +1,6 @@
 import createAsyncSpotTrybe from './spotify.js'
 import { createAudioElement } from './player.js';
 import {addLocalStorage, getCurrentFav} from './localStorageHandler.js'
-let limit = 20;
 console.log(JSON.parse(localStorage.currentUser));
 
 function makeNewSearch(array, clear) {
@@ -10,7 +9,6 @@ function makeNewSearch(array, clear) {
   type.id === 'grid' ? container.className = 'grid-container' : container.className = 'flex-container'
   if (clear) {
     container.innerHTML = '';
-    limit = 20
   }
   const imagemPlayer = document.querySelector('#current-image-player')
   array.forEach(({ name, id, artists, preview_url, album }, index) => {
@@ -181,5 +179,3 @@ changeGrid();
 window.onload = () => {
   getTop50();
 }
-
-export { getCurrentFav, addLocalStorage };
