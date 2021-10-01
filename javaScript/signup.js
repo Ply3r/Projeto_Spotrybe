@@ -42,10 +42,8 @@ const isUser = (username) => {
 };
 
 const createNewAccount = async (username, password, clientId, clientSecret, spotifyId) => {
-  const spotTrybe = await createAsyncSpotTrybe();
   let name = username;
-  if (spotifyId) name = (await spotTrybe.getUserProfileInfo(spotifyId)).display_name;
-
+  
   const object = {
     [username]: {
       name,
@@ -58,8 +56,22 @@ const createNewAccount = async (username, password, clientId, clientSecret, spot
       favorites: [],
     },
   };
-  localStorage.setItem(username, JSON.stringify(object[username]));
+  console.log(object[username]);
+  await localStorage.setItem('currentUser', JSON.stringify(object[username]));
+  await localStorage.setItem(username, JSON.stringify(object[username]));
+
+  if (spotifyId) await setName(username, spotifyId);
+  
 };
+
+const setName = async (username, spotifyId) => {
+  const spotTrybe = await createAsyncSpotTrybe();
+  const userJSON = localStorage.getItem(username);
+  const user = JSON.parse(userJSON);
+  user.name = (await spotTrybe.getUserProfileInfo(spotifyId)).display_name;
+  localStorage.setItem('currentUser', JSON.stringify(user));
+  localStorage.setItem(username, JSON.stringify(user));
+}
 
 const validateForm = () => {
   const form = document.querySelector('form');
