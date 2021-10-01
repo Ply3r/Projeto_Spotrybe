@@ -52,7 +52,7 @@ const signIn = (e) => {
     if (password === user.password) {
       localStorage.setItem('currentUser', JSON.stringify(user));
       createSuccessElement('Logged in successfully!', passwordContainer);
-      window.location.href = '../pages/discovery.html';
+      window.location.href = './pages/discovery.html';
     } else {
       createErrorElement('Password is not correct!', passwordContainer);
     }
