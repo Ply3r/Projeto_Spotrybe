@@ -96,6 +96,18 @@ main .info-profile .card-container-playlist .cards-group .img-card-playlist {
   Card profile
 */
 
+.links-container {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.links-container p {
+  margin-bottom: 5px;
+}
+
 main .info-profile .profile-card {
   background: #202020;
   padding: 10px;

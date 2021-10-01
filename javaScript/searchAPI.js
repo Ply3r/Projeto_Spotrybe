@@ -5,19 +5,29 @@ let limit = 20;
 console.log(JSON.parse(localStorage.currentUser));
 
 function makeNewSearch(array, clear) {
-  const container = document.querySelector('.grid-container')
-  const imagemPlayer = document.querySelector('#current-image-player')
+  const type = document.querySelector('.bot-active')
+  const container = document.querySelector('#main-container')
+  type.id === 'grid' ? container.className = 'grid-container' : container.className = 'flex-container'
   if (clear) {
     container.innerHTML = '';
     limit = 20
   }
-  array.forEach(({ name, id, artists, preview_url, album }) => {
+  const imagemPlayer = document.querySelector('#current-image-player')
+  array.forEach(({ name, id, artists, preview_url, album }, index) => {
     const { images } = album;
     const img = images[0].url
     const artistas = artists
       .map((artista) => artista.name)
       .join(', ')
-    const div = createDiv(id, 'grid-item')
+    let div;
+    if (type.id === 'grid') {
+      div = createDiv(id, 'grid-item')
+    } else {
+      div = createDiv(id, 'flex-item')
+      const p = createText('p', index + 1)
+      p.id = `index-${index + 1}`
+      div.appendChild(p)
+    }
     if(preview_url) {
       div.addEventListener('click', () => {
         imagemPlayer.src = img;
@@ -87,16 +97,26 @@ const getSearch = async (query, limite, slice = 0) => {
   }
 }
 
+
+
 function makeTop50(array) {
-  const container = document.querySelector('.grid-container')
+  const type = document.querySelector('.bot-active')
+  const container = document.querySelector('#main-container')
+  type.id === 'grid' ? container.className = 'grid-container' : container.className = 'flex-container'
   container.innerHTML = '';
   const imagemPlayer = document.querySelector('#current-image-player')
-  array.forEach(({ id, artists, preview_url, album: { name, images } }) => {
+  array.forEach(({ id, artists, preview_url, album: { name, images } }, index) => {
     const artistas = artists
       .map((artista) => artista.name)
       .join(', ')
     const img = images[1].url
-    const div = createDiv(id, 'grid-item')
+    let div;
+    if (type.id === 'grid') {
+      div = createDiv(id, 'grid-item')
+    } else {
+      div = createDiv(id, 'flex-item')
+      div.appendChild(createText('p', index + 1))
+    }
     if(preview_url) {
       div.addEventListener('click', () => {
         imagemPlayer.src = img;
@@ -124,24 +144,39 @@ function getSearchInput() {
     if (!value) {
       getTop50();
     } else {
-      getSearch(value, 20);
+      getSearch(value, 50);
     }
   })
 }
 getSearchInput();
 
-function verifyScroll() {
-  const container = document.querySelector('.grid-container')
-  container.addEventListener('scroll', () => {
-    const isTheEnd = (container.scrollHeight - container.scrollTop) >= 550;
-    if(isTheEnd) {
-      const { value } = document.getElementById('search');
-      limit += 20
-      getSearch(value, limit, limit - 20)
+function changeGrid() {
+  const botContainer = document.querySelector('.bot-container')
+  botContainer.addEventListener('click', ({target}) => {
+    const container = document.querySelector('#main-container');
+    target = target.closest('.btn')
+    if (!target.classList.contains('bot-active')) {
+      const childs = botContainer.children
+      for (let c = 0; c < childs.length; c += 1) {
+        childs[c].className = 'btn btn-secondary';
+      }
+      target.className += ' bot-active'
+      container.className = `${target.id}-container`;
+      const containerItens = container.children;
+      for (let c = 0; c < containerItens.length; c += 1) {
+        if(target.id === 'flex') {
+          const p = createText('p', c + 1);
+          p.id = `index-${c + 1}`
+          containerItens[c].insertBefore(p, containerItens[c].firstChild)
+        } else {
+          const p = document.querySelector(`#index-${c + 1}`).remove()
+        }
+        containerItens[c].className = `${target.id}-item`
+      }
     }
   })
 }
-verifyScroll();
+changeGrid();
 
 window.onload = () => {
   getTop50();
