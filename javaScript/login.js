@@ -67,5 +67,5 @@ const signUpButton = document.querySelector('.signup-btn');
 signInButton.addEventListener('click', signIn);
 signUpButton.addEventListener('click', (e) => {
   e.preventDefault();
-  window.location.href = './signup.html';
+  window.location.href = './pages/signup.html';
 });
