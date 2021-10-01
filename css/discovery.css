@@ -5,14 +5,15 @@
 }
 
 #before, #after {
-  display: flex;
+  display: grid;
+  place-items: center;
   background-color: white;
   color: black;
   font-size: 30px;
   font-weight: bold;
-  width: 38px;
-  border-radius: 20px;
-  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
   margin-left: 30px;
   margin-bottom: 5px;
 }
@@ -42,7 +43,7 @@
 
 .grid-container {
   width: 100%;
-  height: 70vh;
+  height: 55vh;
   overflow: auto;
   padding: 25px;
   display: grid;
